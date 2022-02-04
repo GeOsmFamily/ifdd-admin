@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { RadarChartComponent } from './radar-chart.component';
-import { ChartsModule } from 'ng2-charts';
+import { RadarChartComponent } from "./radar-chart.component";
+import { ChartsModule } from "ng2-charts";
 
-describe('RadarChartComponent', () => {
+describe("RadarChartComponent", () => {
   let component: RadarChartComponent;
   let fixture: ComponentFixture<RadarChartComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [RadarChartComponent],
-      imports: [
-        ChartsModule,
-      ],
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RadarChartComponent],
+        imports: [ChartsModule],
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RadarChartComponent);
@@ -23,7 +22,7 @@ describe('RadarChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

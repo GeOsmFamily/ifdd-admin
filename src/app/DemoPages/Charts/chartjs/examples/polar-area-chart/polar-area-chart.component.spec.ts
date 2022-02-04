@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { PolarAreaChartComponent } from './polar-area-chart.component';
-import { ChartsModule } from 'ng2-charts';
+import { PolarAreaChartComponent } from "./polar-area-chart.component";
+import { ChartsModule } from "ng2-charts";
 
-describe('PolarAreaChartComponent', () => {
+describe("PolarAreaChartComponent", () => {
   let component: PolarAreaChartComponent;
   let fixture: ComponentFixture<PolarAreaChartComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PolarAreaChartComponent],
-      imports: [
-        ChartsModule,
-      ],
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PolarAreaChartComponent],
+        imports: [ChartsModule],
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PolarAreaChartComponent);
@@ -23,7 +22,7 @@ describe('PolarAreaChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

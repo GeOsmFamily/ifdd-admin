@@ -2,13 +2,12 @@
   <div class="page-title-wrapper">
     <div class="page-title-heading">
       <div class="page-title-icon">
-        <i class="icon {{icon}}"></i>
+        <i class="icon {{ icon }}"></i>
       </div>
       <div>
-        {{heading}}
-        <div
-          class="page-title-subheading">
-          {{subheading}}
+        {{ heading }}
+        <div class="page-title-subheading">
+          {{ subheading }}
         </div>
       </div>
     </div>
@@ -16,10 +15,158 @@
       <button type="button" class="btn-shadow me-3 btn btn-dark">
         <fa-icon [icon]="faStar"></fa-icon>
       </button>
-      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">
+      <button
+        type="button"
+        class="btn-shadow d-inline-flex align-items-center btn btn-success"
+        (click)="onPress()"
+      >
         <fa-icon [icon]="faPlus" class="me-2"></fa-icon>
-        Create New
+        {{ button }}
       </button>
+    </div>
+  </div>
+</div>
+
+<div id="comp-render" *ngIf="display">
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+      <h5 class="card-title">Grid</h5>
+      <form>
+        <div class="position-relative row mb-3">
+          <label for="exampleEmail" class="form-label col-sm-2 col-form-label"
+            >Email</label
+          >
+          <div class="col-sm-10">
+            <input
+              name="email"
+              id="exampleEmail"
+              placeholder="with a placeholder"
+              type="email"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="position-relative row mb-3">
+          <label
+            for="examplePassword"
+            class="form-label col-sm-2 col-form-label"
+            >Password</label
+          >
+          <div class="col-sm-10">
+            <input
+              name="password"
+              id="examplePassword"
+              placeholder="password placeholder"
+              type="password"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="position-relative row mb-3">
+          <label for="exampleSelect" class="form-label col-sm-2 col-form-label"
+            >Select</label
+          >
+          <div class="col-sm-10">
+            <select
+              name="select"
+              id="exampleSelect"
+              class="form-control"
+            ></select>
+          </div>
+        </div>
+        <div class="position-relative row mb-3">
+          <label
+            for="exampleSelectMulti"
+            class="form-label col-sm-2 col-form-label"
+            >Select Multiple</label
+          >
+          <div class="col-sm-10">
+            <select
+              multiple="multiple"
+              name="selectMulti"
+              id="exampleSelectMulti"
+              class="form-control"
+            ></select>
+          </div>
+        </div>
+        <div class="position-relative row mb-3">
+          <label
+            for="exampleText"
+            class="form-label form-label col-sm-2 col-form-label"
+            >Text Area</label
+          >
+          <div class="col-sm-10">
+            <textarea
+              name="text"
+              id="exampleText"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+        <div class="position-relative row mb-3">
+          <label for="exampleFile" class="form-label col-sm-2 col-form-label"
+            >File</label
+          >
+          <div class="col-sm-10">
+            <input name="file" id="exampleFile" type="file" class="" />
+            <small class="form-text text-muted"
+              >This is some placeholder block-level help text for the above
+              input. It's a bit lighter and easily wraps to a new line.
+            </small>
+          </div>
+        </div>
+        <fieldset class="position-relative row mb-3">
+          <legend class="col-form-label col-sm-2">Radio Buttons</legend>
+          <div class="col-sm-10">
+            <div class="position-relative form-check">
+              <label class="form-label form-check-label">
+                <input name="radio2" type="radio" class="form-check-input" />
+                Option one is this and that—be sure to include why it's great
+              </label>
+            </div>
+            <div class="position-relative form-check">
+              <label class="form-label form-check-label">
+                <input name="radio2" type="radio" class="form-check-input" />
+                Option two can be something else and selecting it will deselect
+                option one
+              </label>
+            </div>
+            <div class="position-relative form-check disabled">
+              <label class="form-label form-check-label">
+                <input
+                  name="radio2"
+                  disabled="disabled"
+                  type="radio"
+                  class="form-check-input"
+                />
+                Option three is disabled
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <div class="position-relative row mb-3">
+          <label for="checkbox2" class="form-label col-sm-2 col-form-label"
+            >Checkbox</label
+          >
+          <div class="col-sm-10">
+            <div class="position-relative form-check">
+              <label class="form-label form-check-label">
+                <input
+                  id="checkbox2"
+                  type="checkbox"
+                  class="form-check-input"
+                />
+                Check me out
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="position-relative row form-check">
+          <div class="col-sm-10 offset-sm-2">
+            <button class="btn btn-secondary">Submit</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
