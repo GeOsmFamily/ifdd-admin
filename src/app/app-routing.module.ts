@@ -53,6 +53,7 @@ import { LayoutComponent } from "./DemoPages/Forms/Elements/layout/layout.compon
 
 import { ChartjsComponent } from "./DemoPages/Charts/chartjs/chartjs.component";
 import { IsauthGuard } from "./auth/guard/isauth.guard";
+import { FicheODDComponent } from "./DemoPages/Forms/Elements/fiche-odd/fiche-odd.component";
 
 const routes: Routes = [
   {
@@ -178,7 +179,7 @@ const routes: Routes = [
       },
       {
         path: "Forms/elements/fiche-odd",
-        component: FicheOSCComponent,
+        component: FicheODDComponent,
         data: { extraParameter: "elementsMenu" },
       },
     ],

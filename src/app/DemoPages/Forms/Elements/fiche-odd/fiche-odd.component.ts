@@ -6,8 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./fiche-odd.component.sass"],
 })
 export class FicheODDComponent implements OnInit {
-  heading1 = "ODD";
-  subheading1 = "Administration des ODD";
+  heading= "ODD";
+  subheading= "Administration des ODD";
   icon = "pe-7s-stopwatch icon-gradient bg-amy-crisp";
   button_creer = "Créer une ODD";
 
