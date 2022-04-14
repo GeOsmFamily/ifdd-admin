@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 interface Country {
   name: string;
@@ -43,7 +43,10 @@ export class RegularComponent implements OnInit {
   heading = "Regular Tables";
   subheading = "Tables are the backbone of almost all web applications.";
   icon = "pe-7s-drawer icon-gradient bg-happy-itmeo";
-
+  @Input() tableTitle;
+  @Input() organisation;
+  @Input() listOrganisation;
+ 
   constructor() {}
 
   countries = COUNTRIES;

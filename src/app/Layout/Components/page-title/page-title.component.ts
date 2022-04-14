@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { faStar, faPlus } from "@fortawesome/free-solid-svg-icons";
+import * as jQuery from 'jquery';
 
 @Component({
   selector: "app-page-title",
@@ -13,12 +14,25 @@ export class PageTitleComponent {
   @Input() subheading;
   @Input() icon;
   @Input() button;
+  @Input() odd:string;
+  @Input() osc:string;
 
-  display = false;
+  displayOsc = false;
+  displayOdd = false;
+
   onPress() {
-    this.display = true;
-    /*if you want the component to show and hide on click pressed, use 
-    use this line
-    this.display = !this.display;*/
+   
+    if(this.odd ){
+      this.displayOdd=true
+      jQuery('app-creer-odd').css('display', 'block');
+      
+    }
+   if(this.osc){
+      this.displayOsc = true;
+      jQuery('app-creer-osc').css('display', 'block');
+    }
+    console.log(this.osc + ' moi osc')
   }
+
+  
 }

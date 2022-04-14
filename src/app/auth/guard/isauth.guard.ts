@@ -29,7 +29,7 @@ export class IsauthGuard implements CanActivate {
         .pipe()
         .subscribe(
           (user: LoginResponse) => {
-            this.router.navigate([""]);
+           
             resolve(false);
           },
           (err) => {

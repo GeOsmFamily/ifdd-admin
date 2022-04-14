@@ -106,6 +106,12 @@ import { PieChartComponent } from "./DemoPages/Charts/chartjs/examples/pie-chart
 import { NotifierModule } from "angular-notifier";
 import { FicheOSCComponent } from "./DemoPages/Forms/Elements/fiche-osc/fiche-osc.component";
 import { FicheODDComponent } from "./DemoPages/Forms/Elements/fiche-odd/fiche-odd.component";
+import { CreerODDComponent } from "./DemoPages/Forms/Elements/creer-odd/creer-odd.component";
+import { CreerOscComponent } from './DemoPages/Forms/Elements/creer-osc/creer-osc.component';
+import { ActionsComponent } from './shared/actions/actions.component';
+import { OscDetailComponent } from './DemoPages/Forms/Elements/osc-detail/osc-detail.component';
+
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -197,6 +203,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScatterChartComponent,
     FicheOSCComponent,
     FicheODDComponent,
+    CreerODDComponent,
+    CreerOscComponent,
+    ActionsComponent,
+    OscDetailComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -205,6 +216,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
+  
 
     // Angular Bootstrap Components
 
@@ -232,6 +244,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         },
       },
     }),
+  
   ],
   providers: [
     {

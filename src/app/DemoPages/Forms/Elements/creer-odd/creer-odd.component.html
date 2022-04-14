@@ -1,0 +1,108 @@
+<div id="comp-render">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+       <!-- <h5 class="card-title">Grid</h5>-->
+        <form class="form" [formGroup]="OddForm" (submit)="submit()">
+          <!--nom ODD-->
+          <div class="position-relative row mb-3">
+            <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+              >Nom de l'ODD</label
+            >
+            <div class="col-sm-9">
+              <input
+                name="nom"
+                id="nom"
+                placeholder="Nom ODD"
+                type="email"
+                class="form-control"
+                formControlName="nom"
+              />
+            </div>
+          </div>
+          <!--Numero ODD-->
+          <div class="position-relative row mb-3">
+            <label
+              for="exampleNumero"
+              class="form-label col-sm-3 col-form-label"
+              >Numéro ODD</label
+            >
+            <div class="col-sm-9">
+              <input
+                name="numeroOdd"
+                id="numeroOdd"
+                placeholder="numéro odd"
+                type="text"
+                class="form-control"
+                formControlName="numeroOdd"
+              />
+            </div>
+          </div>
+          <!--nombre de catégories-->
+          <div class="position-relative row mb-3">
+            <label
+              for="exampleNombreCategories"
+              class="form-label col-sm-3 col-form-label"
+              >Nombre de catégories</label
+            >
+            <div class="col-sm-9">
+              <input
+                name="numberCategories"
+                id="numberCategories"
+                placeholder="nombre de catégories"
+                type="text"
+                class="form-control"
+                formControlName="numberCategories"
+              />
+            </div>
+          </div>
+          <!--logo ODD-->
+          <div class="position-relative row mb-3">
+            <label for="logo_ODD" class="form-label col-sm-3 col-form-label"
+              >Logo ODD</label
+            >
+            <div class="col-sm-9">
+              <input class="form-control" formControlName="logo_ODD" name="logo_ODD" id="logo_ODD" type="text"/>
+            
+            </div>
+          </div>
+          <!--couleur ODD-->
+          <div class="position-relative row mb-3">
+            <label
+              for="couleurODD"
+              class="form-label col-sm-3 col-form-label"
+              >Couleur ODD</label
+            >
+            <div class="col-sm-9">
+              <input
+                name="couleurODD"
+                id="couleurODD"
+                placeholder="couleur de l'ODD"
+                type="text"
+                class="form-control"
+                formControlName="couleurODD"
+              />
+            </div>
+          </div>
+
+       
+         
+         
+       <!--   <div class="position-relative row form-check">
+            <div class="col-sm-10 offset-sm-2">
+              <button class="btn btn-secondary">Submit</button>
+               <button class="btn btn-secondary" (click)="fermerFormulaire()">Fermer</button>
+          
+            </div>
+            
+          </div>-->
+          <div class="d-block text-center ">
+           
+            <button class="me-2 btn btn-success" type="submit">Ajouter</button>
+            <button class=" btn-icon btn-icon-only btn btn-outline-danger" (click)="annuler()">
+              Annuler
+             </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

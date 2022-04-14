@@ -54,6 +54,9 @@ import { LayoutComponent } from "./DemoPages/Forms/Elements/layout/layout.compon
 import { ChartjsComponent } from "./DemoPages/Charts/chartjs/chartjs.component";
 import { IsauthGuard } from "./auth/guard/isauth.guard";
 import { FicheODDComponent } from "./DemoPages/Forms/Elements/fiche-odd/fiche-odd.component";
+import { OscDetailComponent } from "./DemoPages/Forms/Elements/osc-detail/osc-detail.component";
+import { TabsComponent } from "./DemoPages/Components/tabs/tabs.component";
+import { AuthGuard } from "./auth/guard/auth.guard";
 
 const routes: Routes = [
   {
@@ -65,6 +68,7 @@ const routes: Routes = [
       {
         path: "dashboard",
         component: AnalyticsComponent,
+        canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
 
@@ -103,7 +107,7 @@ const routes: Routes = [
 
       // Components
 
-      // {path: 'components/tabs', component: TabsComponent, data: {extraParameter: 'componentsMenu'}},
+     {path: 'components/tabs', component: TabsComponent, data: {extraParameter: 'componentsMenu'}},
       {
         path: "components/accordions",
         component: AccordionsComponent,
@@ -182,6 +186,8 @@ const routes: Routes = [
         component: FicheODDComponent,
         data: { extraParameter: "elementsMenu" },
       },
+
+      { path: "Forms/elements/osc-detail/:id", component: OscDetailComponent },
     ],
   },
   /*
@@ -212,7 +218,7 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginBoxedComponent,
-    canActivate: [IsauthGuard],
+   
     data: { extraParameter: "" },
   },
   { path: "", redirectTo: "/login", pathMatch: "full" },

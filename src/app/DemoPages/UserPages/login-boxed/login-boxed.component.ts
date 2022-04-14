@@ -29,6 +29,7 @@ export class LoginBoxedComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem("token");
     this.initialiseLoginForm();
   }
 
@@ -57,11 +58,14 @@ export class LoginBoxedComponent implements OnInit {
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((response: { error: boolean; msg?: string }) => {
         if (response.error) {
-          //this.notifier.notify("error", "Echec de Connexion");
-          console.log("connection error");
-          this.router.navigate(["home/dashboard"]);
+          this.notifier.notify("error", "Echec de Connexion");
+          console.log(response);
+          
         } else {
-          this.router.navigate([""]);
+          //this.router.navigate([""]);
+          this.router.navigate(["home/dashboard"]);
+          this.notifier.notify("succès", "Connexion réussie");
+         
         }
       });
   }

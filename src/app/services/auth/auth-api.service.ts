@@ -14,8 +14,8 @@ export class AuthApiService {
   url_prefix = environment.backend;
 
   constructor(private http: HttpClient) {
-    this.headers.append("Content-Type", "application/x-www-form-urlencoded");
     this.headers.append("Content-Type", "application/json");
+    this.headers.append("Accept", "application/json");
     this.headers.append("X-Authorization", environment.apiKey);
   }
 
@@ -72,6 +72,7 @@ export class AuthApiService {
       )
         .pipe(
           catchError((err) => {
+            console.log("ERROR")
             resolve({
               error: true,
               msg: "",
@@ -83,6 +84,7 @@ export class AuthApiService {
         .subscribe(
           (login: LoginResponse) => {
             this.storeToken(login.data.token);
+            console.log(login.data.token)
             resolve({
               error: false,
             });

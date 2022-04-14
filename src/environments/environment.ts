@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
 
-  backend: "http://localhost:8000",
-  apiKey: "dEeeqWdIr5AaXAKFREAG5Pu33QkR25uOASgFxIkxFDz2wkp13BSP5xGSQGcARf1M",
+  backend: "https://ifdd.geosm.org",
+  apiKey: "KHb1NaDr5VLSnQghnZ9e04Xv2mnBYRHQUOZEWpGUfkEemerPnMRzeJNhzCu3VqXq",
+  url_services: 'https://ifdd.geosm.org',
 };
 
 /*

@@ -15,6 +15,7 @@ import { LoginResponse } from "src/app/shared/login-interface";
 })
 export class AuthGuard implements CanActivate {
   constructor(public AuthService: AuthApiService, private router: Router) {}
+  
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
