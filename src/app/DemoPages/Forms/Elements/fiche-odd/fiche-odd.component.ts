@@ -1,3 +1,4 @@
+import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, OnInit, ViewChild  } from "@angular/core";
 import { ComponentHelper } from "src/app/helpers/componentHelper";
 import { PageTitleComponent } from "src/app/Layout/Components/page-title/page-title.component";
@@ -17,29 +18,12 @@ export class FicheODDComponent implements OnInit {
 
   display_fiche=false
 
-  odd=[
-    {
-      "name": "Molecule Man",
-
-     "ville":"hôtel",
-     "status":"en attente"
-     }
-    ,
-    {
-      "name": " Man",
-
-     "ville":"hôtel",
-     "status":"validée"  },
-    {
-      "name": " Man",
-
-      "ville":"hôtel",
-      "status":"en attente"    }
-  ]
-  constructor(public componentHelper: ComponentHelper) {}
+  listeOdd= new Array()
+  constructor(private ifddApiService:IfddApiService) {}
 
   ngOnInit(): void {
     //console.log(this.heading)
+    this.listeOdd= this.ifddApiService.getAllOdd()
   }
   ngAfterViewInit(): void {
     //Called after every check of the component's or directive's content.

@@ -174,11 +174,13 @@ date: {year: number, month: number};
     this.removeAllOsccategoriesOdd()
     this.OscForm.reset()
     jQuery('app-creer-osc').css('display', 'none');
-    alert(" création réussie")
+   // alert(" création réussie")
    
     }
     else{
-      alert("formulaire non valide")
+     // alert("formulaire non valide")
+      //this.notifier.notify('error', 'Echec de Connexion');
+
     }
   }
   annuler(){

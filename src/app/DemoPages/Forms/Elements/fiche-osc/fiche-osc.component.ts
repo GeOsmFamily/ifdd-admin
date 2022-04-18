@@ -1,3 +1,4 @@
+import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -10,9 +11,14 @@ export class FicheOSCComponent implements OnInit {
   subheading = "Administration des OSC";
   icon = "pe-7s-stopwatch icon-gradient bg-amy-crisp";
   button_creer = "Créer une OSC";
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  listeOsc= new Array()
   
+  constructor(private ifddApiService:IfddApiService) {}
+
+  ngOnInit(): void {
+   // this.listeOsc= this.ifddApiService.getAllOsc()
+  }
+  
+
+
 }

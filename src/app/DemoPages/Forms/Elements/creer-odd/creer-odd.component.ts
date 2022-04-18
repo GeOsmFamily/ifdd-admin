@@ -22,10 +22,13 @@ export class CreerODDComponent implements OnInit {
       logo_ODD: ['', Validators.required],
       couleurODD: ['', Validators.required]
     });
+     
+   
   }
   
   submit(){
-   var data = {
+   if(this.OddForm.valid){
+    var data = {
       name: this.OddForm.value.nom,
       number: this.OddForm.value.numeroOdd,
       number_categorie: this.OddForm.value.numberCategories,
@@ -39,11 +42,13 @@ export class CreerODDComponent implements OnInit {
     
     jQuery('app-creer-odd').css('display', 'none');
     
-    alert(" bien ajouté")
+    //alert(" bien ajouté")
 
+   }
     
   }
   annuler(){
+    this.OddForm.reset()
     jQuery('app-creer-odd').css('display', 'none');
   }
 }

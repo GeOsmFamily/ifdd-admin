@@ -111,7 +111,7 @@ import { CreerOscComponent } from './DemoPages/Forms/Elements/creer-osc/creer-os
 import { ActionsComponent } from './shared/actions/actions.component';
 import { OscDetailComponent } from './DemoPages/Forms/Elements/osc-detail/osc-detail.component';
 
-
+import { ListFilterPipe } from './pipe/ListFilterPipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -206,7 +206,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CreerODDComponent,
     CreerOscComponent,
     ActionsComponent,
-    OscDetailComponent
+    OscDetailComponent,
+    ListFilterPipe
     
   ],
   imports: [

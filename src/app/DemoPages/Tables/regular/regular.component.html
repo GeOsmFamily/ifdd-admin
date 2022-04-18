@@ -3,7 +3,43 @@
   <div class="card-header text-center">
     {{tableTitle}}
   </div>
-  <div class="table-responsive">
+  <div class="m-3">
+  
+  <form>
+    <div class="form-group form-inline">
+      Recherche par nom: 
+<input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
+        (input)="search($event.target.value)" />
+    </div>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+     
+        <th scope="col" sortable="name">Nom</th>
+        <th scope="col" sortable="area">Nombre de catégories</th>
+        <th scope="col" sortable="population">logo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let osc of allOsc  | slice: (page-1) * pageSize : page * pageSize">
+       
+        <td>
+         
+          {{ osc.name }}
+        </td>
+        <td>{{ osc.number_categorie }}</td>
+        <td>{{ osc.logo_odd }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ngb-pagination  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="allOsc.length" class="d-flex justify-content-center"></ngb-pagination>
+</div>
+  <!--<div class="table-responsive">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
       <thead>
       <tr>
@@ -132,7 +168,7 @@
       </tr>
       </tbody>
     </table>
-  </div>
+  </div>-->
   <div class="d-block text-center card-footer">
     <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger">
       <i class="pe-7s-trash btn-icon-wrapper"> </i>

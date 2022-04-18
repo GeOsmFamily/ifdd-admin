@@ -12,6 +12,7 @@ import { OddInterface } from 'src/app/shared/oddInterface';
   providedIn: 'root'
 })
 export class IfddApiService {
+  
 
   private readonly notifier: NotifierService; 
   
@@ -53,7 +54,7 @@ export class IfddApiService {
     this.apiService.post_requete('/api/odd',data)
     .then((result:any) => {
       if(result.success){
-        this.notifier.notify("succès", "Création réussie");
+        this.notifier.notify("success", "Création réussie");
       }
       else{
         this.notifier.notify("error", "Création échouée");
@@ -66,7 +67,7 @@ export class IfddApiService {
       this.apiService.post_requete('/api/osc',data)
       .then((result:any) => {
         if(result.success){
-          this.notifier.notify("succès", "Création réussie");
+          this.notifier.notify("success", "Création réussie");
         }
         else{
           this.notifier.notify("error", "Création échouée");
@@ -95,4 +96,60 @@ export class IfddApiService {
 
       return this.idCategoriesOdd
     }
+
+
+    getAllOdd():any[]{
+     var  listeOdd= new Array()
+      this.apiService.getRequest('/api/odd')
+      .then((result) => {
+        console.log(result)
+        if(result){
+        for (let index = 0; index < result.data.length; index++) {
+            listeOdd?.push({'id':result.data[index].id,
+            'name':result.data[index].name,
+                          'number':result.data[index].number,
+                          'number_categorie':result.data[index].number_categorie,
+                          'color':result.data[index].color,
+                          'logo_odd':result.data[index].logo_odd
+                          
+                        }
+                          )            
+          }
+         console.log(listeOdd)
+        }
+        else{
+          //this.notifier.notify("error", "Création échouée");
+        }
+       // console.log(result)
+      });
+
+      return listeOdd
+    }
+
+    getAllOsc():any[]{
+      var  listeOsc= new Array()
+       this.apiService.getRequest('/api/osc')
+       .then((result) => {
+         console.log(result)
+         if(result){
+         for (let index = 0; index < result.data.length; index++) {
+             listeOsc?.push({'id':result.data[index].id,
+             'name':result.data[index].name,
+             'numero_osc':result.data[index].numero_osc,
+                           'pays':result.data[index].pays,
+                           'date_fondation':result.data[index].date_fondation,
+                                                      
+                         }
+                           )            
+           }
+          console.log(listeOsc)
+         }
+         else{
+           //this.notifier.notify("error", "Création échouée");
+         }
+        // console.log(result)
+       });
+ 
+       return listeOsc
+     }
 }

@@ -1,3 +1,4 @@
+import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, Input, OnInit } from "@angular/core";
 
 interface Country {
@@ -46,10 +47,27 @@ export class RegularComponent implements OnInit {
   @Input() tableTitle;
   @Input() organisation;
   @Input() listOrganisation;
- 
-  constructor() {}
+  @Input() allOsc;
 
-  countries = COUNTRIES;
+  //for bootstraptable
+  searchTerm: string;
+  page = 1;
+  pageSize = 10;
+  collectionSize: number;
+  currentRate = 8;
+  countries=new Array();
+  listeOsc= new Array()
 
-  ngOnInit() {}
+  constructor(private ifddApiService:IfddApiService) {}
+
+
+  ngOnInit() {
+  //  this.listeOsc= this.ifddApiService.getAllOdd()
+    this.collectionSize = this.allOsc.length;
+  }
+
+  search(value: string): void {
+    this.allOsc = this.allOsc.filter((val) => val.name.toLowerCase().includes(value));
+    this.collectionSize = this.allOsc.length;
+  }
 }
