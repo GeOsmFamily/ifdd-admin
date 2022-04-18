@@ -17,6 +17,11 @@
                 class="form-control"
                 formControlName="nom"
               />
+              <div style="color: red;" *ngIf="OddForm.controls['nom'].invalid && OddForm.controls['nom'].touched">
+                <div *ngIf="OddForm.controls['nom'].errors.required">
+                  odd name is required.
+                </div>
+            </div>
             </div>
           </div>
           <!--Numero ODD-->
@@ -35,6 +40,11 @@
                 class="form-control"
                 formControlName="numeroOdd"
               />
+              <div style="color: red;" *ngIf="OddForm.controls['numeroOdd'].invalid && OddForm.controls['numeroOdd'].touched">
+                <div *ngIf="OddForm.controls['numeroOdd'].errors.required">
+                  odd number is required.
+                </div>
+            </div>
             </div>
           </div>
           <!--nombre de catégories-->
@@ -53,6 +63,11 @@
                 class="form-control"
                 formControlName="numberCategories"
               />
+              <div style="color: red;" *ngIf="OddForm.controls['numberCategories'].invalid && OddForm.controls['numberCategories'].touched">
+                <div *ngIf="OddForm.controls['numberCategories'].errors.required">
+                  odd  number categories is required.
+                </div>
+            </div>
             </div>
           </div>
           <!--logo ODD-->
@@ -62,7 +77,11 @@
             >
             <div class="col-sm-9">
               <input class="form-control" formControlName="logo_ODD" name="logo_ODD" id="logo_ODD" type="text"/>
-            
+              <div style="color: red;" *ngIf="OddForm.controls['logo_ODD'].invalid && OddForm.controls['logo_ODD'].touched">
+                <div *ngIf="OddForm.controls['logo_ODD'].errors.required">
+                 logo  odd is required.
+                </div>
+            </div>
             </div>
           </div>
           <!--couleur ODD-->
@@ -81,6 +100,11 @@
                 class="form-control"
                 formControlName="couleurODD"
               />
+              <div style="color: red;" *ngIf="OddForm.controls['couleurODD'].invalid && OddForm.controls['couleurODD'].touched">
+                <div *ngIf="OddForm.controls['couleurODD'].errors.required">
+                  color odd is required.
+                </div>
+            </div>
             </div>
           </div>
 
@@ -97,7 +121,7 @@
           </div>-->
           <div class="d-block text-center ">
            
-            <button class="me-2 btn btn-success" type="submit">Ajouter</button>
+            <button class="me-2 btn btn-success" type="submit" [disabled]="!OddForm.valid">Ajouter</button>
             <button class=" btn-icon btn-icon-only btn btn-outline-danger" (click)="annuler()">
               Annuler
              </button>

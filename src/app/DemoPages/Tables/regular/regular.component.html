@@ -18,19 +18,27 @@
      
         <th scope="col" sortable="name">Nom</th>
         <th scope="col" sortable="area">Nombre de catégories</th>
-        <th scope="col" sortable="population">logo</th>
+     
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr
-        *ngFor="let osc of allOsc  | slice: (page-1) * pageSize : page * pageSize">
+        *ngFor="let osc of allOsc  | slice: (page-1) * pageSize : page * pageSize; index as i">
        
         <td>
          
           {{ osc.name }}
         </td>
         <td>{{ osc.number_categorie }}</td>
-        <td>{{ osc.logo_odd }}</td>
+       
+        <td class="text-center">
+         <tr>
+          <button type="button" class="me-2 btn btn-primary btn-sm">Editer</button>
+          <button type="button" class="me-2 btn btn-primary btn-sm">Supprimer</button>
+       
+         </tr>
+            </td>
       </tr>
     </tbody>
   </table>
