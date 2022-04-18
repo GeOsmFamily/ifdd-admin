@@ -50,30 +50,38 @@ export class IfddApiService {
    
 
 
-  creerODD(data:any){
+  creerODD(data:any):boolean{
+   var  ok=false
     this.apiService.post_requete('/api/odd',data)
     .then((result:any) => {
       if(result.success){
+        ok=true
         this.notifier.notify("success", "Création réussie");
       }
       else{
+        ok=false
         this.notifier.notify("error", "Création échouée");
       }
      // console.log(result)
     });
+    return ok
   }
 
-    creerOSC(data:any){
+    creerOSC(data:any):boolean{
+      var ok=false
       this.apiService.post_requete('/api/osc',data)
       .then((result:any) => {
         if(result.success){
+          ok=true
           this.notifier.notify("success", "Création réussie");
         }
         else{
+          ok=false
           this.notifier.notify("error", "Création échouée");
         }
        // console.log(result)
       });
+      return ok
     }
 
     getAllCategoriesOdd():any[]{

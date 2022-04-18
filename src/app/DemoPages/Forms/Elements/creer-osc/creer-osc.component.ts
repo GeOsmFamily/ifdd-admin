@@ -169,10 +169,11 @@ date: {year: number, month: number};
       
     };
 
-    this.ifddApiService.creerOSC(data)
+    var ok=this.ifddApiService.creerOSC(data)
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()
-    this.OscForm.reset()
+    if(ok)
+      this.OscForm.reset()
     jQuery('app-creer-osc').css('display', 'none');
    // alert(" création réussie")
    
