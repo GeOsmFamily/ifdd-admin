@@ -36,8 +36,9 @@ export class CreerODDComponent implements OnInit {
       color: this.OddForm.value.couleurODD,
       
     };
-    this.ifddApiService.creerODD(data)
-    this.OddForm.reset()
+    var ok=this.ifddApiService.creerODD(data)
+    if(ok)
+     this.OddForm.reset()
   
     
     jQuery('app-creer-odd').css('display', 'none');
