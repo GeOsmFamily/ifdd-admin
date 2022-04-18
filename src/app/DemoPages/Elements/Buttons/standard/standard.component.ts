@@ -1,22 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-standard',
-  templateUrl: './standard.component.html',
-  styles: []
+  selector: "app-standard",
+  templateUrl: "./standard.component.html",
+  styles: [],
 })
 export class StandardComponent implements OnInit {
-
-  heading = 'Standard Buttons';
-  subheading = 'Wide selection of buttons that feature different styles for backgrounds, borders and hover options!';
-  icon = 'pe-7s-plane icon-gradient bg-tempting-azure';
+  heading = "Standard Buttons";
+  subheading =
+    "Wide selection of buttons that feature different styles for backgrounds, borders and hover options!";
+  icon = "pe-7s-plane icon-gradient bg-tempting-azure";
 
   progress: boolean | number = false;
 
   model = {
     left: true,
     middle: false,
-    right: false
+    right: false,
   };
 
   startLoading() {
@@ -35,10 +35,7 @@ export class StandardComponent implements OnInit {
     }, 400);
   }
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

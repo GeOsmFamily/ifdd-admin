@@ -2,13 +2,12 @@
   <div class="page-title-wrapper">
     <div class="page-title-heading">
       <div class="page-title-icon">
-        <i class="icon {{icon}}"></i>
+        <i class="icon {{ icon }}"></i>
       </div>
       <div>
-        {{heading}}
-        <div
-          class="page-title-subheading">
-          {{subheading}}
+        {{ heading }}
+        <div class="page-title-subheading">
+          {{ subheading }}
         </div>
       </div>
     </div>
@@ -16,10 +15,19 @@
       <button type="button" class="btn-shadow me-3 btn btn-dark">
         <fa-icon [icon]="faStar"></fa-icon>
       </button>
-      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">
+      <button
+        type="button"
+        class="btn-shadow d-inline-flex align-items-center btn btn-success"
+        (click)="onPress()"
+      >
         <fa-icon [icon]="faPlus" class="me-2"></fa-icon>
-        Create New
+        {{ button }}
       </button>
     </div>
   </div>
 </div>
+
+
+
+<app-creer-odd *ngIf="displayOdd"></app-creer-odd>
+<app-creer-osc *ngIf="displayOsc"></app-creer-osc>

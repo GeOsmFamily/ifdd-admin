@@ -1,0 +1,489 @@
+<div id="comp-render">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title">Grid</h5>
+        <form [formGroup]="OscForm" (submit)="submit()">
+               <!--nom OSC-->
+               <div class="position-relative row mb-3">
+                <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                  >Nom de l'OSC</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    name="name"
+                    id="name"
+                    placeholder="Nom OSC"
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                    
+                  />
+                  <div style="color: red;" *ngIf="OscForm.controls['name'].invalid && OscForm.controls['name'].touched">
+                    <div *ngIf="OscForm.controls['name'].errors.required">
+                      Name is required.
+                    </div>
+                </div>
+                </div>
+
+              </div>
+              <!--abbréviation OSC-->
+              <div class="position-relative row mb-3">
+                <label
+                  for="exampleNumero"
+                  class="form-label col-sm-3 col-form-label"
+                  >abbréviation</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    name="abbreviation"
+                    id="abbreviation"
+                    placeholder="abbréviation de l'OSC"
+                    type="text"
+                    class="form-control"
+                    formControlName="abbreviation"
+                  />
+                  <div style="color: red;" *ngIf="OscForm.controls['abbreviation'].invalid && OscForm.controls['abbreviation'].touched">
+                    <div *ngIf="OscForm.controls['abbreviation'].errors.required">
+                      abbreviation is required.
+                    </div>
+                </div>
+                </div>
+              </div>
+              <!--numéro osc-->
+              <div class="position-relative row mb-3">
+                <label
+                  for="numero_osc"
+                  class="form-label col-sm-3 col-form-label"
+                  >Numéro de l'OSC</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    name="numero_osc"
+                    id="numero_osc "
+                    placeholder="numéro de l'OSC"
+                    type="text"
+                    class="form-control"
+                    formControlName="numero_osc"
+                  />
+                  <div style="color: red;" *ngIf="OscForm.controls['numero_osc'].invalid && OscForm.controls['numero_osc'].touched">
+                    <div *ngIf="OscForm.controls['numero_osc'].errors.required">
+                      osc number is required.
+                    </div>
+                </div>
+                </div>
+              </div>
+              <!--pays OSC-->
+              <div class="position-relative row mb-3">
+                <label for="logo" class="form-label col-sm-3 col-form-label"
+                  >Pays</label
+                >
+                <div class="col-sm-9">
+                  <input  placeholder="pays de l'OSC" class="form-control" formControlName="pays" name="pays" id="pays" type="text"/>
+                  <div style="color: red;" *ngIf="OscForm.controls['pays'].invalid && OscForm.controls['pays'].touched">
+                    <div *ngIf="OscForm.controls['pays'].errors.required">
+                      country is required.
+                    </div>
+                </div>
+                </div>
+              </div>
+              <!--date fondation de l'OSC-->
+              <div class="position-relative row mb-3">
+                <label
+                  for="date_fondation"
+                  class="form-label col-sm-3 col-form-label"
+                  >Date fondation</label
+                >
+                <div class="col-sm-9">
+                  <input class="form-control" placeholder="yyyy-mm-dd"  
+                  name="date_fondation"  id="date_fondation" formControlName="date_fondation"   id="date_fondation" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1980, month: 1, day: 1}">  
+                  <div class="input-group-append">  
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>  
+                  </div>  
+
+
+                <!--  <input
+                    name="date_fondation"
+                    id="date_fondation"
+                    placeholder="année/mois/jour"
+                    type="text"
+                    class="form-control"
+                    formControlName="date_fondation"
+                  />
+                  <div style="color: red;" *ngIf="OscForm.controls['date_fondation'].invalid && OscForm.controls['date_fondation'].touched">
+                    <div *ngIf="OscForm.controls['date_fondation'].errors.required">
+                      fondation date is required.
+                    </div>
+                </div>-->
+                </div>
+              </div>
+
+               <!--description de l'OSC-->
+               <div class="position-relative row mb-3">
+                <label
+                  for="description"
+                  class="form-label col-sm-3 col-form-label"
+                  >Description</label
+                >
+                <div class="col-sm-9">
+                  <textarea name="description" id="description" formControlName="description" class="form-control"></textarea>
+                 
+                </div>
+              </div>
+     <!--personne de contact de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="personne_contact"
+        class="form-label col-sm-3 col-form-label"
+        >Personne de contact</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="personne_contact"
+          id="personne_contact"
+          placeholder="personne de contact de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="personne_contact"
+        />
+        <div style="color: red;" *ngIf="OscForm.controls['personne_contact'].invalid && OscForm.controls['personne_contact'].touched">
+          <div *ngIf="OscForm.controls['personne_contact'].errors.required">
+            person contact is required.
+          </div>
+      </div>
+      </div>
+    </div>
+         
+
+     <!--telephone de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="telephone"
+        class="form-label col-sm-3 col-form-label"
+        >Téléphone</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="telephone"
+          id="telephone"
+          placeholder="téléphone de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="telephone"
+        />
+        <div style="color: red;" *ngIf="OscForm.controls['telephone'].invalid && OscForm.controls['telephone'].touched">
+          <div *ngIf="OscForm.controls['telephone'].errors.required">
+            phone is required.
+          </div>
+      </div>
+      </div>
+    </div>
+
+     <!--email de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="email_osc"
+        class="form-label col-sm-3 col-form-label"
+        >Email</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="email_osc"
+          id="email_osc"
+          placeholder="émail de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="email_osc"
+        />
+        <div style="color: red;" *ngIf="OscForm.controls['email_osc'].invalid && OscForm.controls['email_osc'].touched">
+          <div *ngIf="OscForm.controls['email_osc'].errors.required">
+            email is required.
+          </div>
+      </div>
+      </div>
+    </div>
+
+     <!--site web de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="site_web"
+        class="form-label col-sm-3 col-form-label"
+        >Site web</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="site_web"
+          id="site_web"
+          placeholder="site web de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="site_web"
+        />
+      </div>
+    </div>
+
+     <!--facebook de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="facebook"
+        class="form-label col-sm-3 col-form-label"
+        >Facebook</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="facebook"
+          id="facebook"
+          placeholder="facebook de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="facebook"
+        />
+      </div>
+    </div>
+
+     <!--twitter de l'OSC-->
+     <div class="position-relative row mb-3">
+      <label
+        for="twitter"
+        class="form-label col-sm-3 col-form-label"
+        >Twitter</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="twitter"
+          id="twitter"
+          placeholder="twitter de l'OSC"
+          type="text"
+          class="form-control"
+          formControlName="twitter"
+        />
+      </div>
+    </div>
+
+    <!--instagram de l'OSC-->
+    <div class="position-relative row mb-3">
+      <label
+        for="instagram"
+        class="form-label col-sm-3 col-form-label"
+        >Instagram</label
+      >
+      <div class="col-sm-9">
+        <input
+          name="instagram"
+          id="instagram"
+          placeholder="instagram"
+          type="text"
+          class="form-control"
+          formControlName="instagram"
+        />
+      </div>
+    </div>
+
+      <!--linkedin de l'OSC-->
+      <div class="position-relative row mb-3">
+        <label
+          for="linkedin"
+          class="form-label col-sm-3 col-form-label"
+          >Linkedin</label
+        >
+        <div class="col-sm-9">
+          <input
+            name="linkedin"
+            id="linkedin"
+            placeholder="linkedin"
+            type="text"
+            class="form-control"
+            formControlName="linkedin"
+          />
+        </div>
+      </div>
+
+       <!--longitude de l'OSC-->
+       <div class="position-relative row mb-3">
+        <label
+          for="longitude"
+          class="form-label col-sm-3 col-form-label"
+          >Longitude</label
+        >
+        <div class="col-sm-9">
+          <input
+            name="longitude"
+            id="longitude"
+            placeholder="longitude"
+            type="text"
+            class="form-control"
+            formControlName="longitude"
+          />
+          <div style="color: red;" *ngIf="OscForm.controls['longitude'].invalid && OscForm.controls['longitude'].touched">
+            <div *ngIf="OscForm.controls['longitude'].errors.required">
+              longitude is required.
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <!--latitude de l'OSC-->
+      <div class="position-relative row mb-3">
+        <label
+          for="latitude"
+          class="form-label col-sm-3 col-form-label"
+          >Latitude</label
+        >
+        <div class="col-sm-9">
+          <input
+            name="latitude"
+            id="latitude"
+            placeholder="latitude"
+            type="text"
+            class="form-control"
+            formControlName="latitude"
+          />
+          <div style="color: red;" *ngIf="OscForm.controls['latitude'].invalid && OscForm.controls['latitude'].touched">
+            <div *ngIf="OscForm.controls['latitude'].errors.required">
+              latitude is required.
+            </div>
+        </div>
+        </div>
+      </div>
+
+       <!--siege de l'OSC-->
+       <div class="position-relative row mb-3">
+        <label
+          for="siege"
+          class="form-label col-sm-3 col-form-label"
+          >Siege</label
+        >
+        <div class="col-sm-9">
+          <input
+            name="siege"
+            id="siege"
+            placeholder="siege"
+            type="text"
+            class="form-control"
+            formControlName="siege"
+          />
+          <div style="color: red;" *ngIf="OscForm.controls['siege'].invalid && OscForm.controls['siege'].touched">
+            <div *ngIf="OscForm.controls['siege'].errors.required">
+              local site is required.
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <!--zone intervention de l'OSC-->
+      <div class="position-relative row mb-3">
+        <label
+          for="zone_intervention"
+          class="form-label col-sm-3 col-form-label"
+          >Zone intervention</label>
+
+        <div class="col-sm-9" formArrayName="zoneInterventions">
+         <!-- <textarea  formControlName="zone_intervention" name="zone_intervention" id="zone_intervention" class="form-control"></textarea>
+         -->
+         <div style="color: red;" *ngIf="getZoneInterventionsArray().controls.length< 1">
+          <div *ngIf="getZoneInterventionsArray().errors.required">
+           intervention zone is required.
+          </div>
+      </div>
+         
+            <div class="position-relative row mb-3" *ngFor="let ZoneIntervention of getZoneInterventionsArray().controls; let i = index;" [formGroupName]="i">
+             <div class="col-sm-3">
+              Name: <input type="text" formControlName="name" class="form-control">
+        
+
+            <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('name').invalid && getZoneInterventionsArray().controls[i].get('name').touched">
+              <div *ngIf="getZoneInterventionsArray().controls[i].get('name').errors.required">
+               intervention zone name is required.
+              </div>
+          </div>
+             </div>
+             <div class="col-sm-3">
+              longitude: <input type="text" formControlName="longitude" class="form-control">
+              <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('longitude').invalid && getZoneInterventionsArray().controls[i].get('longitude').touched">
+                <div *ngIf="getZoneInterventionsArray().controls[i].get('longitude').errors.required">
+                 intervention zone longitude is required.
+                </div>
+            </div>
+             </div>
+             <div class="col-sm-3">
+              latitude: <input type="text" formControlName="latitude" class="form-control">
+              <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('latitude').invalid && getZoneInterventionsArray().controls[i].get('latitude').touched">
+                <div *ngIf="getZoneInterventionsArray().controls[i].get('latitude').errors.required">
+                 intervention zone latitude is required.
+                </div>
+            </div>
+             </div>
+             <div class="col-sm-3">
+             <label style="color: white;">kjjjjjj</label> <button class="form-control" (click)="removeZoneIntervention(i)" class="btn btn-danger form-control">supprimer</button>
+          
+             </div>
+             
+            </div>
+        
+          <button type="button" (click)="addZoneIntervention()">
+            Ajouter
+          </button>
+         
+        
+        </div>
+      </div>
+    
+       <!--catégories odd de l'OSC-->
+       <div class="position-relative row mb-3">
+        <label
+          for="siege"
+          class="form-label col-sm-3 col-form-label"
+          >Catégories ODD</label>
+ <div class="col-sm-9" formArrayName="osccategoriesOdd">
+         <!-- <textarea  formControlName="zone_intervention" name="zone_intervention" id="zone_intervention" class="form-control"></textarea>
+         -->
+      
+         
+            <div class="position-relative row mb-3" *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
+             <div class="col-sm-5">
+              id ODD: 
+              <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd">
+                <option value="">--Choisir l'id catégorie ODD--</option>
+                <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
+               
+            </select>
+           
+              
+             </div>
+             <div class="col-sm-4">
+             Description: <textarea  formControlName="description" name="description" id="description" class="form-control"></textarea>
+         
+             </div>
+             
+             <div class="col-sm-3">
+             <label style="color: white;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
+          
+             </div>
+             
+            </div>
+        
+          <button type="button" (click)="addOsccategoriesOdd()" >
+            Ajouter
+          </button>
+         
+        
+        </div>
+      </div>
+       <!--   <div class="position-relative row form-check">
+            <div class="col-sm-10 offset-sm-2">
+              <button class="btn btn-secondary">Submit</button>
+               <button class="btn btn-secondary" (click)="fermerFormulaire()">Fermer</button>
+          
+            </div>
+            
+          </div>-->
+          <div class="d-block text-center ">
+           
+            <button class="me-2 btn btn-success" [disabled]="!OscForm.valid" type="submit">Créer</button>
+            <button class=" btn-icon btn-icon-only btn btn-outline-danger" (click)="annuler()">
+              Annuler
+             </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

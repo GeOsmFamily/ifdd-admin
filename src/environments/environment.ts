@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  backend: "https://ifdd.geosm.org",
+  apiKey: "KHb1NaDr5VLSnQghnZ9e04Xv2mnBYRHQUOZEWpGUfkEemerPnMRzeJNhzCu3VqXq",
+  url_services: 'https://ifdd.geosm.org',
 };
 
 /*

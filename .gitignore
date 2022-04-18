@@ -44,3 +44,5 @@ testem.log
 .DS_Store
 Thumbs.db
 /src/environments/environment.prod.ts
+/src/db-1642674853552.json
+/src/.prettierrc.json

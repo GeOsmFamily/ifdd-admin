@@ -1,27 +1,28 @@
-import {Component} from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
+  selector: "app-carousel",
+  templateUrl: "./carousel.component.html",
 })
 export class CarouselComponent {
+  heading = "Carousels & Slideshows";
+  subheading =
+    "Create easy and beautiful slideshows with these Vue components.";
+  icon = "pe-7s-album icon-gradient bg-sunny-morning";
 
-  heading = 'Carousels & Slideshows';
-  subheading = 'Create easy and beautiful slideshows with these Vue components.';
-  icon = 'pe-7s-album icon-gradient bg-sunny-morning';
-
-  images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
+  images = [1, 2, 3].map(
+    () => `https://picsum.photos/900/500?random&t=${Math.random()}`
+  );
 
   slides = [
-    {img: '1'},
-    {img: '2'},
-    {img: '3'},
-    {img: '4'},
-    {img: '5'},
-    {img: '6'},
-    {img: '7'},
-    {img: '8'},
-
+    { img: "1" },
+    { img: "2" },
+    { img: "3" },
+    { img: "4" },
+    { img: "5" },
+    { img: "6" },
+    { img: "7" },
+    { img: "8" },
   ];
   slideConfig = {
     slidesToShow: 1,
@@ -29,10 +30,10 @@ export class CarouselComponent {
   };
 
   slideConfig2 = {
-    className: 'center',
+    className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: '60px',
+    centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
     dots: true,
@@ -52,25 +53,25 @@ export class CarouselComponent {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   slideConfig4 = {
@@ -79,22 +80,21 @@ export class CarouselComponent {
   };
 
   slideConfig5 = {
-    className: 'slider variable-width',
+    className: "slider variable-width",
     dots: true,
     infinite: true,
     centerMode: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true
+    variableWidth: true,
   };
 
   slideConfig6 = {
-    className: 'center',
+    className: "center",
     infinite: true,
     slidesToShow: 1,
     speed: 500,
     adaptiveHeight: true,
     dots: true,
   };
-
 }

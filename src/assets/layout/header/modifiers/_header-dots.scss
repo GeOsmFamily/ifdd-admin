@@ -17,7 +17,6 @@
     }
 
     .dropdown-item {
-
       .flag {
         position: absolute;
         @include border-radius($border-radius-lg);
@@ -60,8 +59,8 @@
     }
 
     .icon-wrapper-bg {
-      opacity: .1;
-      transition: opacity .2s;
+      opacity: 0.1;
+      transition: opacity 0.2s;
       @include border-radius(40px);
     }
 
@@ -73,7 +72,7 @@
       cursor: pointer;
 
       .icon-wrapper-bg {
-        opacity: .2;
+        opacity: 0.2;
       }
     }
 
