@@ -160,4 +160,22 @@ export class IfddApiService {
  
        return listeOsc
      }
+
+     updateOdd(data:any):boolean{
+      var ok=false
+
+      this.apiService.put_requete('/api/odd/'+data.id,data)
+      .then((result:any) => {
+        if(result.success){
+          ok=true
+          this.notifier.notify("success", "Mise à jour réussie");
+        }
+        else{
+          ok=false
+          this.notifier.notify("error", "Mise à jour échouée");
+        }
+       // console.log(result)
+      });
+      return false
+     }
 }
