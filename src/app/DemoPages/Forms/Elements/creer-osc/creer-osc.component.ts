@@ -98,7 +98,7 @@ date: {year: number, month: number};
       description: ['', ],
       personne_contact: ['', Validators.required],
       telephone: ['', [Validators.required]],
-      email_osc: ['',  [Validators.required, Validators.email]],
+      email_osc: ['', Validators.required],
       site_web: ['',],
       facebook: ['',],
       twitter: ['', ],
