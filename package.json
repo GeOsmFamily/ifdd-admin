@@ -28,6 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^9.1.3",
     "@ngx-loading-bar/core": "^5.1.1",
     "@ngx-loading-bar/router": "^5.1.1",
+   
     "angular-notifier": "^9.1.0",
     "animate-sass": "^0.8.2",
     "bootstrap": "^4.6.0",
@@ -35,7 +36,9 @@
     "chartjs-adapter-luxon": "^0.2.2",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^0.7.0",
+   
     "font-awesome": "^4.7.0",
+    "jquery": "^3.6.0",
     "json-server": "^0.17.0",
     "lodash-es": "^4.17.21",
     "ng2-charts": "^2.4.2",
@@ -52,8 +55,10 @@
     "@angular/compiler-cli": "^11.2.2",
     "@angular/language-service": "^11.2.2",
     "@fortawesome/fontawesome-free": "^5.8.1",
+    "@types/datatables.net": "^1.10.21",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jquery": "^3.5.9",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "cross-env": "^5.0.5",

@@ -73,11 +73,11 @@ export class IfddApiService {
       .then((result:any) => {
         if(result.success){
           ok=true
-          this.notifier.notify("success", "Création réussie");
+        //  this.notifier.notify("success", "Création réussie");
         }
         else{
           ok=false
-          this.notifier.notify("error", "Création échouée");
+         // this.notifier.notify("error", "Création échouée");
         }
        // console.log(result)
       });
@@ -174,7 +174,8 @@ export class IfddApiService {
           ok=false
           this.notifier.notify("error", "Mise à jour échouée");
         }
-       // console.log(result)
+        console.log(result)
+        console.log(data.logo_odd)
       });
       return false
      }
