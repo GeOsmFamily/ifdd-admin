@@ -111,7 +111,9 @@ import { CreerOscComponent } from './DemoPages/Forms/Elements/creer-osc/creer-os
 import { ActionsComponent } from './shared/actions/actions.component';
 import { OscDetailComponent } from './DemoPages/Forms/Elements/osc-detail/osc-detail.component';
 
-import { ListFilterPipe } from './pipe/ListFilterPipe';
+
+import { SearchFilterPipe } from './pipe/search-filter.pipe';
+//import {DataTablesModule} from 'angular-datatables';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -207,7 +209,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CreerOscComponent,
     ActionsComponent,
     OscDetailComponent,
-    ListFilterPipe
+    SearchFilterPipe,
+    
     
   ],
   imports: [
@@ -245,6 +248,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         },
       },
     }),
+    //DataTablesModule,
   
   ],
   providers: [

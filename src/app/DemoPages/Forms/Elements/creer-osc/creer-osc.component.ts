@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import * as jQuery from 'jquery';
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -14,14 +15,14 @@ export class CreerOscComponent implements OnInit {
 
   //formulaire de création des osc
   OscForm!: FormGroup;
-
+  private readonly notifier: NotifierService;
 idCategoriesOdd= new Array() 
 
 //calendar
 model: NgbDateStruct;
 date: {year: number, month: number};
-  constructor(private calendar: NgbCalendar,private fb: FormBuilder,private ifddApiService: IfddApiService) {
-   
+  constructor(  notifierService: NotifierService,private calendar: NgbCalendar,private fb: FormBuilder,private ifddApiService: IfddApiService) {
+    this.notifier = notifierService;
    
    }
 
@@ -92,13 +93,12 @@ date: {year: number, month: number};
     this.OscForm = this.fb.group({
       name: ['', [Validators.required]],
       abbreviation: ['', Validators.required],
-      numero_osc: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       pays: ['', Validators.required],
       date_fondation: ['', Validators.required],
       description: ['', ],
       personne_contact: ['', Validators.required],
-      telephone: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      email_osc: ['',  [Validators.required, Validators.email]],
+      telephone: ['', [Validators.required]],
+      email_osc: ['', Validators.required],
       site_web: ['',],
       facebook: ['',],
       twitter: ['', ],
@@ -125,7 +125,7 @@ date: {year: number, month: number};
     console.log("dta  = "+this.OscForm.value.date_fondation)
    
     if(this.OscForm.valid){
-      alert("valid")
+     
       //construction du tableau des zones d'intervention
     var zoneInterventionArray=new Array()
     var zoneInterventions = this.OscForm.get('zoneInterventions') as FormArray;
@@ -149,7 +149,6 @@ date: {year: number, month: number};
     var data = {
       name: this.OscForm.value.name,
       abbreviation: this.OscForm.value.abbreviation,
-      numero_osc: this.OscForm.value.numero_osc,
       pays: this.OscForm.value.pays,
       date_fondation: this.model.year+"/"+this.model.month+"/"+this.model.day,
       description: this.OscForm.value.description,
@@ -176,17 +175,18 @@ date: {year: number, month: number};
       this.OscForm.reset()
     jQuery('app-creer-osc').css('display', 'none');
    // alert(" création réussie")
-   
+   this.notifier.notify('success','création réussie');
     }
     else{
      // alert("formulaire non valide")
-      //this.notifier.notify('error', 'Echec de Connexion');
+      this.notifier.notify('error', 'Création échouée');
 
     }
   }
   annuler(){
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()
+    this.OscForm.reset()
     jQuery('app-creer-osc').css('display', 'none');
   }
 

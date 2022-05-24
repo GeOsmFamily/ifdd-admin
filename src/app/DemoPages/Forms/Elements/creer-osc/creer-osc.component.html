@@ -49,29 +49,7 @@
                 </div>
                 </div>
               </div>
-              <!--numéro osc-->
-              <div class="position-relative row mb-3">
-                <label
-                  for="numero_osc"
-                  class="form-label col-sm-3 col-form-label"
-                  >Numéro de l'OSC</label
-                >
-                <div class="col-sm-9">
-                  <input
-                    name="numero_osc"
-                    id="numero_osc "
-                    placeholder="numéro de l'OSC"
-                    type="text"
-                    class="form-control"
-                    formControlName="numero_osc"
-                  />
-                  <div style="color: red;" *ngIf="OscForm.controls['numero_osc'].invalid && OscForm.controls['numero_osc'].touched">
-                    <div *ngIf="OscForm.controls['numero_osc'].errors.required">
-                      osc number is required.
-                    </div>
-                </div>
-                </div>
-              </div>
+             
               <!--pays OSC-->
               <div class="position-relative row mb-3">
                 <label for="logo" class="form-label col-sm-3 col-form-label"
@@ -438,24 +416,24 @@
          -->
       
          
-            <div class="position-relative row mb-3" *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
-             <div class="col-sm-5">
-              id ODD: 
-              <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd">
-                <option value="">--Choisir l'id catégorie ODD--</option>
+            <div class="position-relative row " *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
+             <div class="col-sm-5" >
+              <label style="color: white;visibility: hidden;">kjjjjjj</label>
+              <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control">
+                <option value="" selected>--Choisir l'id catégorie ODD--</option>
                 <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
                
             </select>
            
               
              </div>
-             <div class="col-sm-4">
+             <div class="col-sm-5">
              Description: <textarea  formControlName="description" name="description" id="description" class="form-control"></textarea>
          
              </div>
              
-             <div class="col-sm-3">
-             <label style="color: white;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
+             <div class="col-sm-2">
+             <label style="color: white;visibility: hidden;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
           
              </div>
              
@@ -476,7 +454,7 @@
             </div>
             
           </div>-->
-          <div class="d-block text-center ">
+          <div class="d-block text-center " style="margin-top: 80px;">
            
             <button class="me-2 btn btn-success" [disabled]="!OscForm.valid" type="submit">Créer</button>
             <button class=" btn-icon btn-icon-only btn btn-outline-danger" (click)="annuler()">

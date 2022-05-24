@@ -1,6 +1,8 @@
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, Input, OnInit } from "@angular/core";
 
+import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+
 interface Country {
   name: string;
   flag: string;
@@ -8,32 +10,6 @@ interface Country {
   population: number;
 }
 
-const COUNTRIES: Country[] = [
-  {
-    name: "Russia",
-    flag: "f/f3/Flag_of_Russia.svg",
-    area: 17075200,
-    population: 146989754,
-  },
-  {
-    name: "Canada",
-    flag: "c/cf/Flag_of_Canada.svg",
-    area: 9976140,
-    population: 36624199,
-  },
-  {
-    name: "United States",
-    flag: "a/a4/Flag_of_the_United_States.svg",
-    area: 9629091,
-    population: 324459463,
-  },
-  {
-    name: "China",
-    flag: "f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
-    area: 9596960,
-    population: 1409517397,
-  },
-];
 
 @Component({
   selector: "app-regular",
@@ -58,9 +34,44 @@ export class RegularComponent implements OnInit {
   countries=new Array();
   listeOsc= new Array()
 
-  constructor(private ifddApiService:IfddApiService) {}
 
+  //modal dialog
+  title = 'ng-bootstrap-modal-demo';
+  closeResult: string;
+  modalOptions:NgbModalOptions;
 
+  editData:any = {};
+   showModalPopUp : boolean = false;
+
+  constructor(private ifddApiService:IfddApiService,private modalService: NgbModal) {
+    this.modalOptions = {
+      backdrop:'static',
+      backdropClass:'customBackdrop'
+    }
+  }
+
+  editPopUpmodal = (data) => {
+    this.showModalPopUp = true;
+    this.editData = Object.assign(data);
+ }
+
+  open(content,data) {
+    this.editData = Object.assign(data);
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
   ngOnInit() {
   //  this.listeOsc= this.ifddApiService.getAllOdd()
     this.collectionSize = this.allOsc.length;
@@ -70,4 +81,21 @@ export class RegularComponent implements OnInit {
     this.allOsc = this.allOsc.filter((val) => val.name.toLowerCase().includes(value));
     this.collectionSize = this.allOsc.length;
   }
+
+  update(data:any){
+
+    var donnes={
+      'id':data.id,
+      'name':data.name,
+      'number':data.number,
+      'number_categorie':data.number_categorie,
+      'logo_odd':data.logo_odd,
+      'color':data.color
+    }
+    this.ifddApiService.updateOdd(donnes)
+    this.closeModal('mymodal')
+  }
+  closeModal(id: string) {
+    this.modalService.dismissAll(id)
+}
 }

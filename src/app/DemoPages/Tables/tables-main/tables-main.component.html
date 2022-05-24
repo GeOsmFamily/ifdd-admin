@@ -1,4 +1,3 @@
-
 <div class="main-card mb-3 card">
   <div class="card-header text-center">
    Liste des OSC
@@ -16,7 +15,7 @@
     <thead>
       <tr>
      
-        <th scope="col" sortable="name">Numero Osc</th>
+        
         <th scope="col" sortable="area">Nom</th>
         <th scope="col" sortable="population">pays</th>
         <th scope="col" sortable="population">date de fondation</th>
@@ -26,10 +25,7 @@
       <tr
         *ngFor="let osc of listeOsc  | slice: (page-1) * pageSize : page * pageSize">
        
-        <td>
-         
-          {{ osc.numero_osc }}
-        </td>
+       
         <td>{{ osc.name}}</td>
         <td>{{ osc.pays}}</td>
         <td>{{ osc.date_fondation}}</td>
@@ -41,6 +37,7 @@
   [pageSize]="pageSize"
   [collectionSize]="listeOsc.length" class="d-flex justify-content-center"></ngb-pagination>
 </div>
+
   <!--<div class="table-responsive">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
       <thead>

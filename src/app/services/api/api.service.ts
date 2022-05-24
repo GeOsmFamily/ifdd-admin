@@ -100,6 +100,26 @@ export class ApiService {
     });
   }
 
+  put_requete(url: string, data: Object): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .put(this.url_prefix + url, data, {
+          headers: this.get_header(),
+        })
+        .toPromise()
+        .then(
+          (res) => {
+          
+            resolve(res);
+          },
+          (msg) => {
+            // Error
+
+            reject(msg.error);
+          }
+        );
+    });
+  }
   logout_post_requete(url: string, data: Object): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
