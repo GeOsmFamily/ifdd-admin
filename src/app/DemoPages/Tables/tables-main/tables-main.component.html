@@ -19,6 +19,7 @@
         <th scope="col" sortable="area">Nom</th>
         <th scope="col" sortable="population">pays</th>
         <th scope="col" sortable="population">date de fondation</th>
+        <th scope="col" sortable="area">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +30,14 @@
         <td>{{ osc.name}}</td>
         <td>{{ osc.pays}}</td>
         <td>{{ osc.date_fondation}}</td>
+          <td class="text-center">
+         <tr>
+         <app-edit-button-osc [osc]="osc">  </app-edit-button-osc>
+          <button type="button" class="me-2 btn btn-primary btn-sm">Supprimer</button>
+       
+         </tr>
+       
+          </td>
       </tr>
     </tbody>
   </table>

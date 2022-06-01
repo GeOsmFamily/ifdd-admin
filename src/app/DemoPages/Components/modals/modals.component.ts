@@ -1,9 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbModalRef, NgbDateStruct, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
+import { Datum } from "src/app/shared/osc";
+import { ModalConfig } from "./modal.config";
 
 @Component({
   selector: "app-modals",
   templateUrl: "./modals.component.html",
+  styleUrls: ['./modals.scss']
 })
 export class ModalsComponent implements OnInit {
   heading = "Modals";
@@ -13,44 +16,58 @@ export class ModalsComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(private modalService: NgbModal) {}
+ public modalConfig: ModalConfig
+  @ViewChild('modal') private modalContent: TemplateRef<ModalsComponent>
+  @Input() osc:Datum
+  private modalRef: NgbModalRef
+  modalOptions:NgbModalOptions;
 
-  open(content) {
-    this.modalService.open(content).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );
+  //calendar
+model: NgbDateStruct;
+
+  constructor(private modalService: NgbModal) { }
+
+  ngOnInit(): void { 
+    this.modalConfig={
+      modalTitle:"hhh",
+      dismissButtonLabel: "annuler",
+      closeButtonLabel: "annuler",
+     
+    }
   }
-
-  openCentred(content) {
-    this.modalService.open(content, { centered: true });
-  }
-
-  openSmall(content) {
-    this.modalService.open(content, {
-      size: "sm",
-    });
-  }
-
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: "lg",
-    });
-  }
-
+  
+ 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
+      return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
+      return 'by clicking on a backdrop';
     } else {
-      return `with: ${reason}`;
+      return  `with: ${reason}`;
+    }
+  }
+  open(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.modalRef = this.modalService.open(this.modalContent)
+      this.modalRef.result.then(resolve, resolve)
+    })
+  }
+
+  async close(): Promise<void> {
+    if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
+      const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
+      this.modalRef.close(result)
     }
   }
 
-  ngOnInit() {}
-}
+  async dismiss(): Promise<void> {
+    if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
+      const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
+      this.modalRef.dismiss(result)
+    }
+  }
+  }
+
+  
+
+

@@ -12,6 +12,7 @@ import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
+import { MatStepperModule} from '@angular/material';
 
 // BOOTSTRAP COMPONENTS
 
@@ -69,7 +70,7 @@ import { IconsComponent } from "./DemoPages/Elements/icons/icons.component";
 import { AccordionsComponent } from "./DemoPages/Components/accordions/accordions.component";
 import { TabsComponent } from "./DemoPages/Components/tabs/tabs.component";
 import { CarouselComponent } from "./DemoPages/Components/carousel/carousel.component";
-import { ModalsComponent } from "./DemoPages/Components/modals/modals.component";
+
 import { ProgressBarComponent } from "./DemoPages/Components/progress-bar/progress-bar.component";
 import { PaginationComponent } from "./DemoPages/Components/pagination/pagination.component";
 import { TooltipsPopoversComponent } from "./DemoPages/Components/tooltips-popovers/tooltips-popovers.component";
@@ -113,6 +114,10 @@ import { OscDetailComponent } from './DemoPages/Forms/Elements/osc-detail/osc-de
 
 
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
+import { ModalsComponent } from "./DemoPages/Components/modals/modals.component";
+import { EditButtonOscComponent } from './shared/edit-button-osc/edit-button-osc.component';
+import { OscStepperComponent } from './DemoPages/Components/stepper/osc-stepper/osc-stepper.component';
+
 //import {DataTablesModule} from 'angular-datatables';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -210,6 +215,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ActionsComponent,
     OscDetailComponent,
     SearchFilterPipe,
+   
+    EditButtonOscComponent,
+        OscStepperComponent,
+   
+   
     
     
   ],
@@ -220,6 +230,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
+    MatStepperModule,
   
 
     // Angular Bootstrap Components

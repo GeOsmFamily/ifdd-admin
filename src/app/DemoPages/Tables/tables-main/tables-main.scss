@@ -1,0 +1,14 @@
+th,
+td {
+ // border: 1px solid black;
+  //width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+table {
+    //border: 1px solid black;
+    table-layout: fixed;
+    //width: 200px;
+  }

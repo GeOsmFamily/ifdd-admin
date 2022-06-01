@@ -20,16 +20,13 @@ idCategoriesOdd= new Array()
 
 //calendar
 model: NgbDateStruct;
-date: {year: number, month: number};
-  constructor(  notifierService: NotifierService,private calendar: NgbCalendar,private fb: FormBuilder,private ifddApiService: IfddApiService) {
+
+  constructor(  notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
     this.notifier = notifierService;
    
    }
 
-   selectToday() {
-    this.model = this.calendar.getToday();
-  }
-
+  
    getZoneInterventionsArray(): FormArray {  
     return this.OscForm.get("zoneInterventions") as FormArray  
   }  

@@ -63,13 +63,13 @@ export class ApiService {
   getRequest(path: string): Promise<any> {
     let promise = new Promise((resolve, reject) => {
       this.http
-        .get(this.url_prefix + path, { headers: this.entetes })
+        .get(this.url_prefix + path, { headers: this.get_header() })
         .toPromise()
         .then(
-          (res) => {
+          res => {
             resolve(res);
           },
-          (msg) => {
+          msg => {
             // Error
             reject(msg);
           }

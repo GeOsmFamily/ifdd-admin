@@ -49,21 +49,30 @@
                 </div>
                 </div>
               </div>
-             
-              <!--pays OSC-->
-              <div class="position-relative row mb-3">
-                <label for="logo" class="form-label col-sm-3 col-form-label"
-                  >Pays</label
-                >
-                <div class="col-sm-9">
-                  <input  placeholder="pays de l'OSC" class="form-control" formControlName="pays" name="pays" id="pays" type="text"/>
-                  <div style="color: red;" *ngIf="OscForm.controls['pays'].invalid && OscForm.controls['pays'].touched">
-                    <div *ngIf="OscForm.controls['pays'].errors.required">
-                      country is required.
-                    </div>
-                </div>
-                </div>
+             <!--pays OSC-->
+             <div class="position-relative row mb-3">
+              <label for="logo" class="form-label col-sm-3 col-form-label"
+                >Pays</label
+              >
+              <div class="col-sm-9 " style="width: 250px;">
+                <select name="pays" id="pays" formControlName="pays"  class="form-control">
+                  <option value="" selected>--Choisir le pays de l'osc--</option>
+                  <option  value="BENIN">
+                    Bénin
+                  </option>
+                  <option  value="TOGO">
+                    Togo
+                  </option>
+                 
+              </select>
+              <div style="color: red;" *ngIf="OscForm.controls['pays'].invalid && OscForm.controls['pays'].touched">
+                  <div *ngIf="OscForm.controls['pays'].errors.required">
+                    country is required.
+                  </div>
               </div>
+              </div>
+            
+            </div>
               <!--date fondation de l'OSC-->
               <div class="position-relative row mb-3">
                 <label
@@ -73,7 +82,7 @@
                 >
                 <div class="col-sm-9">
                   <input class="form-control" placeholder="yyyy-mm-dd"  
-                  name="date_fondation"  id="date_fondation" formControlName="date_fondation"   id="date_fondation" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1980, month: 1, day: 1}">  
+                  name="date_fondation"  id="date_fondation" formControlName="date_fondation"   id="date_fondation" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
                   <div class="input-group-append">  
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>  
                   </div>  
@@ -456,8 +465,8 @@
           </div>-->
           <div class="d-block text-center " style="margin-top: 80px;">
            
-            <button class="me-2 btn btn-success" [disabled]="!OscForm.valid" type="submit">Créer</button>
-            <button class=" btn-icon btn-icon-only btn btn-outline-danger" (click)="annuler()">
+            <button class="me-2 btn btn-success" [disabled]="!OscForm.valid" >Créer</button>
+            <button class=" btn-icon btn-icon-only btn btn-outline-danger" type="button" (click)="annuler()">
               Annuler
              </button>
           </div>

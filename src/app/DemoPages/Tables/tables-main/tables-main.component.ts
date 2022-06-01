@@ -1,9 +1,11 @@
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, OnInit } from "@angular/core";
+import { Datum } from 'src/app/shared/osc';
 
 @Component({
   selector: "app-tables-main",
   templateUrl: "./tables-main.component.html",
+  styleUrls: ['./tables-main.scss']
 })
 export class TablesMainComponent implements OnInit {
   heading = "Bootstrap 5 Tables";
@@ -17,11 +19,15 @@ export class TablesMainComponent implements OnInit {
   collectionSize: number;
   currentRate = 8;
   countries=new Array();
-  listeOsc= new Array()
+  listeOsc?:Datum[]=[]
+
   constructor(private ifddApiService:IfddApiService) {}
 
   ngOnInit() {
-      this.listeOsc= this.ifddApiService.getAllOsc()
+      this.ifddApiService.getAllOsc1().subscribe(oscs => {
+       this.listeOsc =oscs
+       console.log(this.listeOsc)
+      });
       this.collectionSize = this.listeOsc.length;
     }
   

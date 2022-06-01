@@ -1,3 +1,4 @@
+import { Datum, OrganisationCivile } from './../../shared/osc';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -7,6 +8,7 @@ import { catchError } from "rxjs/operators";
 import { Observable, from } from "rxjs";
 import { NotifierService } from 'angular-notifier';
 import { OddInterface } from 'src/app/shared/oddInterface';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
@@ -133,7 +135,16 @@ export class IfddApiService {
 
       return listeOdd
     }
-
+    getAllOsc1(): Observable<Datum[]> {
+      return from(this.apiService.getRequest('/api/osc')).pipe(
+        map((oscs:OrganisationCivile) => {
+          return oscs.data;
+        }),
+        catchError(err => {
+          throw new Error(err);
+        })
+      );
+    }
     getAllOsc():any[]{
       var  listeOsc= new Array()
        this.apiService.getRequest('/api/osc')

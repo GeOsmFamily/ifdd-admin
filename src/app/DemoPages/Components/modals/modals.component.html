@@ -1,295 +1,381 @@
-<app-page-title
-  [heading]="heading"
-  [subheading]="subheading"
-  [icon]="icon"
-></app-page-title>
+<ng-template #modal >
+  
+  <div class="modal-header">
+    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <perfect-scrollbar>
+       <!--Nom osc-->
+    <div class="position-relative row mb-3">
+      <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+        >Nom de l'OSC</label
+      >
+      <div class="col-sm-9">
+        <input type="text" [(ngModel)] = "osc.name"
+          name="name"
+          id="name"
+         
+          class="form-control"
+        />
+     
+      </div>
+    </div>
+    <!--Abbréviation osc-->
+    <div class="position-relative row mb-3">
+      <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+        >Abbréviation</label
+      >
+      <div class="col-sm-9">
+        <input type="text" [(ngModel)] = "osc.abbreviation"
+          name="abbreviation"
+          id="abbreviation"
+        
+          class="form-control"
+        />
+     
+      </div>
+    </div>
+      <!--Pays osc-->
+      <div class="position-relative row mb-3">
+        <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+          >Pays</label
+        >
+        <div class="col-sm-9">
+          <select  [(ngModel)]="osc.pays" name="pays" id="pays"   class="form-control">
+           
+            <option  value="BENIN">
+              BENIN
+            </option>
+            <option  value="TOGO">
+              TOGO
+            </option>
+           
+        </select>
+          
+       
+        </div>
+      </div>
+       <!--dATE FONDATION osc-->
+    <div class="position-relative row mb-3">
+      <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+        >Date fondation</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control"  
+        name="date_fondation"  id="date_fondation"   id="date_fondation" [(ngModel)]="osc.date_fondation" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
+        <div class="input-group-append">  
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>  
+        </div>    
+     
+      </div>
+    </div>
+      <!--Description osc-->
+      <div class="position-relative row mb-3">
+        <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+          >Description</label
+        >
+        <div class="col-sm-9">
+          <textarea  rows = "5" cols = "40" maxlength = "200" [(ngModel)] = "osc.description" name="description" id="description"  class="form-control"></textarea>
+                 
+       
+        </div>
+      </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="card main-card mb-3">
-      <div class="card-header">Basic</div>
-      <div class="card-body">
-        <span *ngIf="closeResult" class="kt-section__sub">
-          <pre>{{ closeResult }}</pre>
-        </span>
-        <div class="divider"></div>
-        <ng-template #content let-c="close" let-d="dismiss">
-          <div class="modal-header">
-            <h4 class="modal-title">Basic demo</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close"
-              (click)="d('Cross click')"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="c('Close click')"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </ng-template>
-        <button class="btn btn-primary" (click)="open(content)">
-          Launch demo modal
-        </button>
+       <!--Personne à contacter-->
+       <div class="position-relative row mb-3">
+        <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+          >Personne de contact</label
+        >
+        <div class="col-sm-9">
+          <input
+          name="personne_contact"
+          id="personne_contact"
+          [(ngModel)] = "osc.personne_contact"
+          type="text"
+          class="form-control"
+         
+        />
+        </div>
       </div>
-    </div>
-    <div class="card main-card mb-3">
-      <div class="card-header">Scrollable Fixed Content</div>
-      <div class="card-body">
-        <ng-template #content let-c="close" let-d="dismiss">
-          <div class="modal-header">
-            <h4 class="modal-title">Scrollable fixed content</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close"
-              (click)="d('Cross click')"
-            >
+
+        <!--Telephone-->
+        <div class="position-relative row mb-3">
+          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+            >Téléphone</label
+          >
+          <div class="col-sm-9">
+            <input
+            name="telephone"
+            id="telephone"
+            [(ngModel)] = "osc.telephone"
+            type="text"
+            class="form-control"
+           
+          />
+          </div>
+        </div>
+            <!--email-->
+            <div class="position-relative row mb-3">
+              <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                >Email</label
               >
-            </button>
-          </div>
-          <div class="modal-body">
-            <perfect-scrollbar style="height: 250px" [config]="config">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </p>
-            </perfect-scrollbar>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="c('Close click')"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </ng-template>
-        <button class="btn btn-primary" (click)="open(content)">
-          Launch demo modal
-        </button>
-      </div>
-    </div>
-    <div class="card main-card mb-3">
-      <div class="card-header">Long Content</div>
-      <div class="card-body">
-        <ng-template #content5 let-c="close" let-d="dismiss">
-          <div class="modal-header">
-            <h4 class="modal-title">Scrollable fixed content</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close"
-              (click)="d('Cross click')"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum ateros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="c('Close click')"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </ng-template>
-        <button class="btn btn-primary" (click)="open(content5)">
-          Launch demo modal
-        </button>
-      </div>
-    </div>
+              <div class="col-sm-9">
+                <input
+                name="email"
+                id="email"
+                [(ngModel)] = "osc.email_osc"
+                type="text"
+                class="form-control"
+               
+              />
+              </div>
+            </div>
+             <!--email-->
+             <div class="position-relative row mb-3">
+              <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                >Email</label
+              >
+              <div class="col-sm-9">
+                <input
+                name="email"
+                id="email"
+                [(ngModel)] = "osc.email_osc"
+                type="text"
+                class="form-control"
+               
+              />
+              </div>
+            </div>
+             <!--site web-->
+             <div class="position-relative row mb-3">
+              <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                >Site web</label
+              >
+              <div class="col-sm-9">
+                <input
+                name="site_web"
+                id="site_web"
+                [(ngModel)] = "osc.site_web"
+                type="text"
+                class="form-control"
+               
+              />
+              </div>
+            </div>
+              <!--facebook-->
+              <div class="position-relative row mb-3">
+                <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                  >facebook</label
+                >
+                <div class="col-sm-9">
+                  <input
+                  name="facebook"
+                  id="facebook"
+                  [(ngModel)] = "osc.facebook"
+                  type="text"
+                  class="form-control"
+                 
+                />
+                </div>
+              </div>
+
+               <!--twitter-->
+               <div class="position-relative row mb-3">
+                <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                  >Twitter</label
+                >
+                <div class="col-sm-9">
+                  <input
+                  name="twitter"
+                  id="twitter"
+                  [(ngModel)] = "osc.twitter"
+                  type="text"
+                  class="form-control"
+                 
+                />
+                </div>
+              </div>
+                  <!--instagram-->
+                  <div class="position-relative row mb-3">
+                    <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                      >Twitter</label
+                    >
+                    <div class="col-sm-9">
+                      <input
+                      name="instagram"
+                      id="instagram"
+                      [(ngModel)] = "osc.instagram"
+                      type="text"
+                      class="form-control"
+                     
+                    />
+                    </div>
+                  </div>
+
+                     <!--linkedin-->
+                     <div class="position-relative row mb-3">
+                      <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                        >Linkedin</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                        name="linkedin"
+                        id="linkedin"
+                        [(ngModel)] = "osc.linkedin"
+                        type="text"
+                        class="form-control"
+                       
+                      />
+                      </div>
+                    </div>
+
+                     <!--longitude-->
+                     <div class="position-relative row mb-3">
+                      <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                        >longitude</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                        name="longitude"
+                        id="longitude"
+                        [(ngModel)] = "osc.longitude"
+                        type="text"
+                        class="form-control"
+                       
+                      />
+                      </div>
+                    </div>
+
+                       <!--latitude-->
+                       <div class="position-relative row mb-3">
+                        <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                          >latitude</label
+                        >
+                        <div class="col-sm-9">
+                          <input
+                          name="latitude"
+                          id="latitude"
+                          [(ngModel)] = "osc.latitude"
+                          type="text"
+                          class="form-control"
+                         
+                        />
+                        </div>
+                      </div>
+
+                        <!--siège-->
+                        <div class="position-relative row mb-3">
+                          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                            >Siège</label
+                          >
+                          <div class="col-sm-9">
+                            <input
+                            name="siege"
+                            id="siege"
+                            [(ngModel)] = "osc.siege"
+                            type="text"
+                            class="form-control"
+                           
+                          />
+                          </div>
+                        </div>
+
+                         <!--Zone intervention-->
+                         <div class="position-relative row mb-3">
+                          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                            >Zone intervention</label
+                          >
+                          <div   class="col-sm-9">
+                            <div class="position-relative row " *ngFor="let zone of osc.zone_interventions">
+                              <div class="col-sm-3">
+                               
+                                  Name: <input type="text"  class="form-control"  [(ngModel)] = "zone.name">
+                            
+                    
+                             
+                               
+                              </div>
+                              <div class="col-sm-2">
+                                longitude: <input  [(ngModel)] = "zone.longitude" type="text" class="form-control">
+                                
+                               </div>
+                               <div class="col-sm-2">
+                                latitude: <input  [(ngModel)] = "zone.latitude" type="text"  class="form-control">
+                               
+                               </div>
+                               <div class="col-sm-2">
+                               <label style="color: white;">kjjjjjj</label> <button class="form-control" (click)="removeZoneIntervention(i)" class="btn btn-danger form-control">supprimer</button>
+                            
+                               </div>
+                               
+                               </div>
+                               <button type="button" (click)="addOsccategoriesOdd()" >
+                                Ajouter
+                              </button>
+                          </div>
+                        
+                        </div>
+
+
+                        <!--Catéégorie ODD-->
+                        <div class="position-relative row mb-3">
+                          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                            >Catégories ODD</label
+                          >
+                          <div   class="col-sm-9">
+                            <div class="position-relative row mb-3" *ngFor="let categorie of osc.categorie_odds">
+                              <div class="col-sm-5" >
+                                <label style="color: white;visibility: hidden;">kjjjjjj</label>
+                                <select name="idCategoriesOdd" id="idCategoriesOdd"   class="form-control">
+                                  <option value="" selected>--Choisir l'id catégorie ODD--</option>
+                                  <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
+                                 
+                              </select>
+                             
+                                
+                               </div>
+                               <div class="col-sm-5">
+                               Description: <textarea [(ngModel)] = "categorie.intitule"  name="description" id="description" class="form-control"></textarea>
+                           
+                               </div>
+                               
+                               <div class="col-sm-2">
+                               <label style="color: white;visibility: hidden;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
+                            
+                               </div>
+                               
+                               </div>
+                               <button type="button" (click)="addOsccategoriesOdd()" >
+                                Ajouter
+                              </button>
+                              
+                          </div>
+                        
+                        </div>
+
+
+                        
+    </perfect-scrollbar>
+   
   </div>
-  <div class="col-md-6">
-    <div class="card main-card mb-3">
-      <div class="card-header">Large Modal</div>
-      <div class="card-body">
-        <ng-template #content6 let-c="close" let-d="dismiss">
-          <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close"
-              (click)="d('Cross click')"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="c('Close click')"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </ng-template>
-        <button class="btn btn-success" (click)="openLarge(content6)">
-          Launch demo modal
-        </button>
-      </div>
-    </div>
-    <div class="card main-card mb-3">
-      <div class="card-header">Small Modal</div>
-      <div class="card-body">
-        <ng-template #content7 let-c="close" let-d="dismiss">
-          <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close"
-              (click)="d('Cross click')"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros. Cras mattis consectetur
-              purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-              vestibulum at eros.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="c('Close click')"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </ng-template>
-        <button class="btn btn-success" (click)="openSmall(content7)">
-          Launch demo modal
-        </button>
-      </div>
-    </div>
+
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-outline-secondary"
+            (click)="dismiss()"
+            *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
+            [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
+      {{ modalConfig.dismissButtonLabel }}
+    </button>
+    <button type="button"
+            class="btn btn-outline-primary"
+            (click)="close()"
+            *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+            [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+      {{ modalConfig.closeButtonLabel }}
+    </button>
   </div>
-</div>
+</ng-template>
