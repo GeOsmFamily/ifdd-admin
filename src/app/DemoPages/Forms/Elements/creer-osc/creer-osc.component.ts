@@ -170,6 +170,7 @@ model: NgbDateStruct;
     this.removeAllOsccategoriesOdd()
     if(ok)
       this.OscForm.reset()
+      console.log("form-rest= ", this.OscForm.reset())
     jQuery('app-creer-osc').css('display', 'none');
    // alert(" création réussie")
    this.notifier.notify('success','création réussie');
