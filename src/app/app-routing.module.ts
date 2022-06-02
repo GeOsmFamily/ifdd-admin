@@ -179,11 +179,13 @@ const routes: Routes = [
       {
         path: "Forms/elements/fiche-osc",
         component: FicheOSCComponent,
+        canActivate: [AuthGuard],
         data: { extraParameter: "elementsMenu" },
       },
       {
         path: "Forms/elements/fiche-odd",
         component: FicheODDComponent,
+        canActivate: [AuthGuard],
         data: { extraParameter: "elementsMenu" },
       },
 
