@@ -1,4 +1,4 @@
-import { FicheOSCComponent } from "./DemoPages/Forms/Elements/fiche-osc/fiche-osc.component";
+import { FicheOSCComponent } from "./DemoPages/Dashboards/fiche-osc/fiche-osc.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -53,21 +53,33 @@ import { LayoutComponent } from "./DemoPages/Forms/Elements/layout/layout.compon
 
 import { ChartjsComponent } from "./DemoPages/Charts/chartjs/chartjs.component";
 import { IsauthGuard } from "./auth/guard/isauth.guard";
-import { FicheODDComponent } from "./DemoPages/Forms/Elements/fiche-odd/fiche-odd.component";
 import { OscDetailComponent } from "./DemoPages/Forms/Elements/osc-detail/osc-detail.component";
 import { TabsComponent } from "./DemoPages/Components/tabs/tabs.component";
 import { AuthGuard } from "./auth/guard/auth.guard";
+import { FicheODDComponent } from "./DemoPages/Dashboards/fiche-odd/fiche-odd.component";
 
 const routes: Routes = [
   {
-    path: "home",
+    path: "",
     component: BaseLayoutComponent,
     children: [
       // Dashboads
 
       {
-        path: "dashboard",
+        path: "",
         component: AnalyticsComponent,
+        canActivate: [AuthGuard],
+        data: { extraParameter: "dashboardsMenu" },
+      },
+      {
+        path: "fiche-osc",
+        component: FicheOSCComponent,
+        canActivate: [AuthGuard],
+        data: { extraParameter: "dashboardsMenu" },
+      },
+      {
+        path: "fiche-odd",
+        component: FicheODDComponent,
         canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
@@ -176,19 +188,14 @@ const routes: Routes = [
         data: { extraParameter: "" },
       },
 
-      {
-        path: "Forms/elements/fiche-osc",
-        component: FicheOSCComponent,
-        canActivate: [AuthGuard],
-        data: { extraParameter: "elementsMenu" },
-      },
+     /*
       {
         path: "Forms/elements/fiche-odd",
         component: FicheODDComponent,
         canActivate: [AuthGuard],
         data: { extraParameter: "elementsMenu" },
       },
-
+*/
       { path: "Forms/elements/osc-detail/:id", component: OscDetailComponent },
     ],
   },

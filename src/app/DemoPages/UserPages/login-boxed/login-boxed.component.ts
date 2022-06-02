@@ -53,19 +53,14 @@ export class LoginBoxedComponent implements OnInit {
   /**
    * submit login form
    */
-  submitLoginForm() {
+   submitLoginForm() {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((response: { error: boolean; msg?: string }) => {
         if (response.error) {
-          this.notifier.notify('error', 'Echec de Connexion');
-          console.log(response);
-          
+          this.notifier.notify("error", "Echec de Connexion");
         } else {
-          //this.router.navigate([""]);
-          this.router.navigate(["home/dashboard"]);
-          this.notifier.notify('success', 'Connexion réussie');
-         
+          this.router.navigate([""]);
         }
       });
   }

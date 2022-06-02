@@ -105,8 +105,7 @@ import { DynamicChartComponent } from "./DemoPages/Charts/chartjs/examples/dynam
 import { DoughnutChartComponent } from "./DemoPages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component";
 import { PieChartComponent } from "./DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component";
 import { NotifierModule } from "angular-notifier";
-import { FicheOSCComponent } from "./DemoPages/Forms/Elements/fiche-osc/fiche-osc.component";
-import { FicheODDComponent } from "./DemoPages/Forms/Elements/fiche-odd/fiche-odd.component";
+import { FicheOSCComponent } from "./DemoPages/Dashboards/fiche-osc/fiche-osc.component";
 import { CreerODDComponent } from "./DemoPages/Forms/Elements/creer-odd/creer-odd.component";
 import { CreerOscComponent } from './DemoPages/Forms/Elements/creer-osc/creer-osc.component';
 import { ActionsComponent } from './shared/actions/actions.component';
@@ -117,6 +116,7 @@ import { SearchFilterPipe } from './pipe/search-filter.pipe';
 import { ModalsComponent } from "./DemoPages/Components/modals/modals.component";
 import { EditButtonOscComponent } from './shared/edit-button-osc/edit-button-osc.component';
 import { OscStepperComponent } from './DemoPages/Components/stepper/osc-stepper/osc-stepper.component';
+import { FicheODDComponent } from "./DemoPages/Dashboards/fiche-odd/fiche-odd.component";
 
 //import {DataTablesModule} from 'angular-datatables';
 
