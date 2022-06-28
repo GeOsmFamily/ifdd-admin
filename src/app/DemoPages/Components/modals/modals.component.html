@@ -45,11 +45,11 @@
         >
         <div class="col-sm-9">
           <select  [(ngModel)]="osc.pays" name="pays" id="pays"   class="form-control">
-           
-            <option  value="BENIN">
+          
+            <option  value="BENIN"     [selected]="'Bénin' === osc.pays">
               BENIN
             </option>
-            <option  value="TOGO">
+            <option  value="TOGO"   [selected]="'Togo' === osc.pays">
               TOGO
             </option>
            
@@ -63,10 +63,12 @@
       <label for="exampleNom" class="form-label col-sm-3 col-form-label"
         >Date fondation</label
       >
+       
       <div class="col-sm-9">
+        <p>{{osc.date_fondation}}</p>
         <input class="form-control"  
-        name="date_fondation"  id="date_fondation"   id="date_fondation" [(ngModel)]="osc.date_fondation" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
-        <div class="input-group-append">  
+      name="date_fondation"  id="date_fondation" formControlName="date_fondation"   id="date_fondation" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
+       <div class="input-group-append">  
           <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>  
         </div>    
      
