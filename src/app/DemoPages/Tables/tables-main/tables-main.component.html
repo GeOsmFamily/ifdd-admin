@@ -1,17 +1,29 @@
-<div class="main-card mb-3 card">
+<!--<div class="main-card mb-3 card">
   <div class="card-header text-center">
    Liste des OSC
   </div>
-  <div class="m-3">
   
-  <form>
-    <div class="form-group form-inline">
-      Recherche par nom: 
-<input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
-        (input)="search($event.target.value)" />
-    </div>
-  </form>
-  <table class="table table-striped">
+  <div class="m-3" >-->
+  
+    <!--<form style="margin-bottom: 20px;"> 
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            name="searchString"
+            placeholder="Rechercher par nom  de l'osc..."
+            [(ngModel)]="searchString"
+          />
+        </div>
+      </div>
+    </form>-->
+
+ 
+  <!--<table id="oscTable" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"  >
     <thead>
       <tr>
      
@@ -22,9 +34,11 @@
         <th scope="col" sortable="area">Actions</th>
       </tr>
     </thead>
-    <tbody>
-      <tr
-        *ngFor="let osc of listeOsc  | slice: (page-1) * pageSize : page * pageSize">
+    <tbody>-->
+      <!--*ngFor="let osc of listeOsc|searchFilter: 'name' : searchString  | slice: (page-1) * pageSize : page * pageSize; let i index">
+       -->
+      <!--<tr
+        *ngFor="let osc of listeOsc">
        
        
         <td>{{ osc.name}}</td>
@@ -33,7 +47,7 @@
           <td class="text-center">
          <tr>
          <app-edit-button-osc [osc]="osc">  </app-edit-button-osc>
-          <button type="button" class="me-2 btn btn-primary btn-sm">Supprimer</button>
+          <button type="button" class="me-2 btn btn-primary btn-sm" (click)=" deleteOsc(osc.id)">Supprimer</button>
        
          </tr>
        
@@ -41,11 +55,11 @@
       </tr>
     </tbody>
   </table>
-
-  <ngb-pagination  [(page)]="page"
+-->
+  <!--<ngb-pagination  [(page)]="page"
   [pageSize]="pageSize"
-  [collectionSize]="listeOsc.length" class="d-flex justify-content-center"></ngb-pagination>
-</div>
+  [collectionSize]="listeOsc.length" class="d-flex justify-content-center"></ngb-pagination>-->
+<!--</div>-->
 
   <!--<div class="table-responsive">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -177,14 +191,14 @@
       </tbody>
     </table>
   </div>-->
-  <div class="d-block text-center card-footer">
+ <!--<div class="d-block text-center card-footer">
     <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger">
       <i class="pe-7s-trash btn-icon-wrapper"> </i>
     </button>
     <button class="btn-wide btn btn-success">Save</button>
   </div>
 </div>
-
+-->
 
 
 <!--<div class="card main-card mb-3">
@@ -773,3 +787,54 @@
   </div>
 </div>
 -->
+
+<div class="main-card mb-3 card">
+  <div class="card-header text-center">
+   Liste des OSC
+  </div>
+  
+  <div class="m-3" >
+    <div class="spinner-grow text-muted text-center" *ngIf="!isLoading" ></div>
+
+<table *ngIf="isLoading" mat-table [dataSource]="dataSource" class="mat-elevation-z8 align-middle text-truncate mb-0 table table-borderless table-hover">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="pays">
+    <th mat-header-cell *matHeaderCellDef> Pays </th>
+    <td mat-cell *matCellDef="let element"> {{element.pays}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="date_fondation">
+    <th mat-header-cell *matHeaderCellDef> Date de fondation</th>
+    <td mat-cell *matCellDef="let element"> {{element.date_fondation}} </td>
+  </ng-container>
+ <!-- Actions Column -->
+ <ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef> Actions</th>
+  <td mat-cell *matCellDef="let element">
+  <app-edit-button-osc [osc]="element">  </app-edit-button-osc>
+  <button type="button" class="me-2 btn btn-primary btn-sm" (click)="clickMethod(element)" >Supprimer</button>
+  </td>
+</ng-container>
+
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+  </mat-paginator>
+
+</div>
+</div>

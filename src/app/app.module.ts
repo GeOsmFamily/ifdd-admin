@@ -12,7 +12,7 @@ import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
-import { MatStepperModule} from '@angular/material';
+
 
 // BOOTSTRAP COMPONENTS
 
@@ -115,10 +115,12 @@ import { OscDetailComponent } from './DemoPages/Forms/Elements/osc-detail/osc-de
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
 import { ModalsComponent } from "./DemoPages/Components/modals/modals.component";
 import { EditButtonOscComponent } from './shared/edit-button-osc/edit-button-osc.component';
-import { OscStepperComponent } from './DemoPages/Components/stepper/osc-stepper/osc-stepper.component';
 import { FicheODDComponent } from "./DemoPages/Dashboards/fiche-odd/fiche-odd.component";
 
-//import {DataTablesModule} from 'angular-datatables';
+import {DataTablesModule} from 'angular-datatables';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatTableModule} from '@angular/material/table'; 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -217,7 +219,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchFilterPipe,
    
     EditButtonOscComponent,
-        OscStepperComponent,
+       
    
    
     
@@ -230,7 +232,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
-    MatStepperModule,
+  
   
 
     // Angular Bootstrap Components
@@ -241,6 +243,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
+
+    MatTableModule, // <-- Added Table Module
+    MatPaginatorModule, // <-- Added Paginator Module
+    MatProgressBarModule, // <-- Added Loader Module
 
     // Charts
 
@@ -259,7 +266,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         },
       },
     }),
-    //DataTablesModule,
+    DataTablesModule,
   
   ],
   providers: [

@@ -60,7 +60,7 @@ export class ApiService {
     return promise;
   }
 
-  getRequest(path: string): Promise<any> {
+  getRequest(path: string,params={}): Promise<any> {
     let promise = new Promise((resolve, reject) => {
       this.http
         .get(this.url_prefix + path, { headers: this.get_header() })
@@ -104,6 +104,27 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       this.http
         .put(this.url_prefix + url, data, {
+          headers: this.get_header(),
+        })
+        .toPromise()
+        .then(
+          (res) => {
+          
+            resolve(res);
+          },
+          (msg) => {
+            // Error
+
+            reject(msg.error);
+          }
+        );
+    });
+  }
+
+  delete_requete(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .delete(this.url_prefix + url,{
           headers: this.get_header(),
         })
         .toPromise()

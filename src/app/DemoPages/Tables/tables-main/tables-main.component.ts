@@ -1,6 +1,13 @@
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Datum } from 'src/app/shared/osc';
+import { DataTableDirective } from "angular-datatables";
+import { Subject } from "rxjs";
+
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
+
 
 @Component({
   selector: "app-tables-main",
@@ -15,24 +22,95 @@ export class TablesMainComponent implements OnInit {
   //for bootstraptable
   searchTerm: string;
   page = 1;
-  pageSize = 10;
+  //pageSize = 10;
   collectionSize: number;
   currentRate = 8;
   countries=new Array();
   listeOsc?:Datum[]=[]
 
-  constructor(private ifddApiService:IfddApiService) {}
+  searchString: string;
+  loading=false
+  actualiser=false
+  rowData:any
 
-  ngOnInit() {
-      this.ifddApiService.getAllOsc1().subscribe(oscs => {
-       this.listeOsc =oscs
-       console.log(this.listeOsc)
-      });
-      this.collectionSize = this.listeOsc.length;
-    }
+  title = "datatables";
+  dtOptions: DataTables.Settings = {};
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtTrigger: Subject<any> = new Subject();
+
   
-    search(value: string): void {
-      this.listeOsc = this.listeOsc.filter((val) => val.name.toLowerCase().includes(value));
-      this.collectionSize = this.listeOsc.length;
+  isLoading = false;
+  totalRows =0;
+  pageSize = 50;
+  currentPage = 0;
+  nextPage=""
+  prevPage=0
+  lastPage=0
+  pageSizeOptions: number[] = [];
+
+  displayedColumns: string[] = ['name', 'pays', 'date_fondation','actions'];
+  dataSource: MatTableDataSource<Datum> = new MatTableDataSource();
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+
+
+  constructor(private ifddApiService:IfddApiService) {
+   
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    
+  }
+  ListeOsc(){
+  
+     this.ifddApiService.findOscPerPage(this.currentPage+1).subscribe(oscs => {
+      this.isLoading = true;
+      this.listeOsc =oscs.data.data
+      this.lastPage=oscs.data.last_page
+    this.paginator.pageIndex=this.currentPage
+     // this.currentPage=this.nextPage
+    
+      this.totalRows=oscs.data.total
+      //this.paginator.pageIndex = this.currentPage;
+      console.log( "pageIndex= "+ this.paginator.pageIndex)
+      console.log("second")
+      console.log("currentPage= "+this.currentPage)
+      this.dataSource=new MatTableDataSource(oscs.data.data)
+      
+      this.loading=true
+      //console.log("hello")
+      console.log(this.dataSource)
+     });
+   
+  }
+  
+  
+ 
+  pageChanged(event: PageEvent) {
+    this.isLoading=false
+    console.log(event.pageIndex);
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.ListeOsc()
+   
+  }
+  ngOnInit(): void {
+    //Load initial data
+   this.ListeOsc()
+  
+  }
+  clickMethod(element:Datum) {
+    console.log(element.id)
+    if(confirm("Voulez vous vraiment supprimer l'OSC  "+element.name)) {
+      this.ifddApiService.deleteOsc(element.id.toString())
+    }
+  }
+
+    deleteOsc(id:string){
+      this.ifddApiService.deleteOsc(id)
     }
 }

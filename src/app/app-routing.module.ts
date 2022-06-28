@@ -68,19 +68,19 @@ const routes: Routes = [
       {
         path: "",
         component: AnalyticsComponent,
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
       {
         path: "fiche-osc",
         component: FicheOSCComponent,
-        canActivate: [AuthGuard],
+      //  canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
       {
         path: "fiche-odd",
         component: FicheODDComponent,
-        canActivate: [AuthGuard],
+       // canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
 
