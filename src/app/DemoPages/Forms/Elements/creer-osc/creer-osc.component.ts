@@ -4,6 +4,7 @@ import * as jQuery from 'jquery';
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
+import { Datum } from 'src/app/shared/osc';
 
 
 @Component({
@@ -21,11 +22,27 @@ idCategoriesOdd= new Array()
 //calendar
 model: NgbDateStruct;
 
-  constructor(  notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
+data:any
+
+  constructor( notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
     this.notifier = notifierService;
    
    }
-
+   addItem(data:any) {
+    // Get a reference to the table
+    console.log("ajout")
+    var table: HTMLTableElement = <HTMLTableElement> document.getElementById("oscTable");
+    var row = table.insertRow(-1);
+   this.addCell(row,0,data.name)
+   this.addCell(row,1,data.pays)
+   this.addCell(row,2,data.date_fondation)
+  }
+   addCell(row,index,text){
+    let newCell = row.insertCell(index);
+    let newText = document.createTextNode(text);
+    newCell.appendChild(newText);
+   } 
+  
   
    getZoneInterventionsArray(): FormArray {  
     return this.OscForm.get("zoneInterventions") as FormArray  
@@ -85,6 +102,7 @@ model: NgbDateStruct;
   
   ngOnInit(): void {
 
+   
     
     //initialisation du formulaire de création de l'OSC
     this.OscForm = this.fb.group({
@@ -169,6 +187,8 @@ model: NgbDateStruct;
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()
     if(ok)
+
+   // this.addItem(data)
       this.OscForm.reset()
       console.log("form-rest= ", this.OscForm.reset())
     jQuery('app-creer-osc').css('display', 'none');

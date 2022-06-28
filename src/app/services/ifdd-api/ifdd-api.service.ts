@@ -1,5 +1,6 @@
+import { Data } from './../../shared/oddInterface';
 import { Datum, OrganisationCivile } from './../../shared/osc';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -9,6 +10,7 @@ import { Observable, from } from "rxjs";
 import { NotifierService } from 'angular-notifier';
 import { OddInterface } from 'src/app/shared/oddInterface';
 import { map } from 'rxjs/internal/operators/map';
+import { Results } from 'src/app/DemoPages/Tables/tables-main/results';
 
 @Injectable({
   providedIn: 'root'
@@ -135,42 +137,50 @@ export class IfddApiService {
 
       return listeOdd
     }
-    getAllOsc1(): Observable<Datum[]> {
-      return from(this.apiService.getRequest('/api/osc')).pipe(
-        map((oscs:OrganisationCivile) => {
-          return oscs.data;
+      getAllOsc1(): Observable<Results> {
+      return from(this.apiService.getRequest('/api/osc?')).pipe(
+        map((oscs:Results) => {
+          console.log("hello")
+          console.log(oscs.data.data)
+          return oscs;
         }),
         catchError(err => {
           throw new Error(err);
         })
       );
     }
-    getAllOsc():any[]{
-      var  listeOsc= new Array()
-       this.apiService.getRequest('/api/osc')
+    findOscPerPage(
+     
+      pageNumber:number):  Observable<Results> {
+
+        return from(this.apiService.getRequest('/api/osc?page='+pageNumber,
+         )).pipe(
+          map((oscs:Results) => {
+            console.log(oscs.data)
+            console.log(pageNumber +"jjjjjjj")
+            return oscs;
+          }),
+          catchError(err => {
+            throw new Error(err);
+          })
+        );
+
+     
+  }
+    deleteOsc(id:string){
+      this.apiService.delete_requete('/api/osc/'+id)
        .then((result) => {
-         console.log(result)
-         if(result){
-         for (let index = 0; index < result.data.length; index++) {
-             listeOsc?.push({'id':result.data[index].id,
-             'name':result.data[index].name,
-             'numero_osc':result.data[index].numero_osc,
-                           'pays':result.data[index].pays,
-                           'date_fondation':result.data[index].date_fondation,
-                                                      
-                         }
-                           )            
-           }
-          console.log(listeOsc)
-         }
-         else{
-           //this.notifier.notify("error", "Création échouée");
-         }
-        // console.log(result)
-       });
- 
-       return listeOsc
-     }
+      
+        if(result){
+          this.notifier.notify("success", "Suppression réussie");
+          
+        }
+        else{
+          this.notifier.notify("error", "Suppression échouée");
+        }
+       // console.log(result)
+      });
+    }
 
      updateOdd(data:any):boolean{
       var ok=false
