@@ -5,6 +5,7 @@ import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Datum } from 'src/app/shared/osc';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,8 +24,9 @@ idCategoriesOdd= new Array()
 model: NgbDateStruct;
 
 data:any
+loading=false
 
-  constructor( notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
+  constructor( private router: Router, notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
     this.notifier = notifierService;
    
    }
@@ -106,23 +108,23 @@ data:any
     
     //initialisation du formulaire de création de l'OSC
     this.OscForm = this.fb.group({
-      name: ['', [Validators.required]],
-      abbreviation: ['', Validators.required],
-      pays: ['', Validators.required],
-      date_fondation: ['', Validators.required],
+      name: ['',Validators.required],
+      abbreviation: ['',Validators.required],
+      pays: ['',Validators.required],
+      date_fondation: [''],
       description: ['', ],
-      personne_contact: ['', Validators.required],
-      telephone: ['', [Validators.required]],
-      email_osc: ['', Validators.required],
+      personne_contact: ['', ],
+      telephone: [''],
+      email_osc: [''],
       site_web: ['',],
       facebook: ['',],
       twitter: ['', ],
       instagram: ['', ],
       linkedin: ['',],
-      longitude: ['', Validators.required],
-      latitude: ['', Validators.required],
-      siege: ['', Validators.required],
-      zoneInterventions:this.fb.array([],[Validators.required]), 
+      longitude: [''],
+      latitude: [''],
+      siege: [''],
+      zoneInterventions:this.fb.array([]), 
       osccategoriesOdd: this.fb.array([]),
       
     });
@@ -137,6 +139,7 @@ data:any
 
   }
   submit(){
+    this.loading=true
     console.log("dta  = "+this.OscForm.value.date_fondation)
    
     if(this.OscForm.valid){
@@ -183,24 +186,33 @@ data:any
       
     };
 
-    var ok=this.ifddApiService.creerOSC(data)
+   this.creerOsc(data)
+   
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()
-    if(ok)
+  
 
-   // this.addItem(data)
-      this.OscForm.reset()
-      console.log("form-rest= ", this.OscForm.reset())
-    jQuery('app-creer-osc').css('display', 'none');
-   // alert(" création réussie")
-   this.notifier.notify('success','création réussie');
-    }
-    else{
-     // alert("formulaire non valide")
-      this.notifier.notify('error', 'Création échouée');
+   
+    
 
-    }
   }
+}
+
+creerOsc(data){
+  this.ifddApiService.creerOSC(data).subscribe(osc => {
+      if(osc.success){
+        this.loading=false
+        this.OscForm.reset()
+        this.notifier.notify('success','création réussie');
+         jQuery('app-creer-osc').css('display', 'none');
+
+        this.router.navigate(["fiche-osc"])
+      }
+      else{
+        this.notifier.notify('error', 'Création échouée');    
+      }
+   });
+}
   annuler(){
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()

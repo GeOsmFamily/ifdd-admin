@@ -57,6 +57,8 @@ import { OscDetailComponent } from "./DemoPages/Forms/Elements/osc-detail/osc-de
 import { TabsComponent } from "./DemoPages/Components/tabs/tabs.component";
 import { AuthGuard } from "./auth/guard/auth.guard";
 import { FicheODDComponent } from "./DemoPages/Dashboards/fiche-odd/fiche-odd.component";
+import { UsersComponent } from "./DemoPages/Dashboards/users/users.component";
+import { CiblesComponent } from "./DemoPages/Dashboards/cibles/cibles.component";
 
 const routes: Routes = [
   {
@@ -68,20 +70,32 @@ const routes: Routes = [
       {
         path: "",
         component: AnalyticsComponent,
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
       {
         path: "fiche-osc",
         component: FicheOSCComponent,
-      //  canActivate: [AuthGuard],
+       canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
       },
       {
         path: "fiche-odd",
         component: FicheODDComponent,
-       // canActivate: [AuthGuard],
+       canActivate: [AuthGuard],
         data: { extraParameter: "dashboardsMenu" },
+      },
+      {
+        path: "users",
+        component: UsersComponent,
+       canActivate: [AuthGuard],
+        data: { extraParameter: "" },
+      },
+      {
+        path: "cibles",
+        component: CiblesComponent,
+       canActivate: [AuthGuard],
+        data: { extraParameter: "" },
       },
 
       // Elements
@@ -196,10 +210,9 @@ const routes: Routes = [
         data: { extraParameter: "elementsMenu" },
       },
 */
-      { path: "Forms/elements/osc-detail/:id", component: OscDetailComponent },
-    ],
+          ],
   },
-  /*
+  
   {
     path: "",
     component: PagesLayoutComponent,
@@ -207,7 +220,7 @@ const routes: Routes = [
       // User Pages
 
       {
-        path: "pages/login-boxed",
+        path: "pages/cibles",
         component: LoginBoxedComponent,
         data: { extraParameter: "" },
       },
@@ -223,7 +236,8 @@ const routes: Routes = [
       },
     ],
   },
-  */
+  
+
   {
     path: "login",
     component: LoginBoxedComponent,

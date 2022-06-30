@@ -1,7 +1,11 @@
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { Datum } from 'src/app/shared/osc';
+import { Odds } from 'src/app/shared/odd';
 
 interface Country {
   name: string;
@@ -23,7 +27,7 @@ export class RegularComponent implements OnInit {
   @Input() tableTitle;
   @Input() organisation;
   @Input() listOrganisation;
-  @Input() allOsc;
+  @Input() allOsc:Odds[]=[];
 
   //for bootstraptable
   searchTerm: string;
@@ -43,11 +47,24 @@ export class RegularComponent implements OnInit {
   editData:any = {};
    showModalPopUp : boolean = false;
 
+
+   displayedColumns: string[] = ['name', 'number_categorie','actions'];
+  dataSource: MatTableDataSource<Datum> = new MatTableDataSource();
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+
+
   constructor(private ifddApiService:IfddApiService,private modalService: NgbModal) {
     this.modalOptions = {
       backdrop:'static',
       backdropClass:'customBackdrop'
     }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    
   }
 
   editPopUpmodal = (data) => {
@@ -74,7 +91,9 @@ export class RegularComponent implements OnInit {
   }
   ngOnInit() {
   //  this.listeOsc= this.ifddApiService.getAllOdd()
-    this.collectionSize = this.allOsc.length;
+  console.log(this.allOsc)
+   
+    
   }
 
   search(value: string): void {
@@ -92,8 +111,17 @@ export class RegularComponent implements OnInit {
       'logo_odd':data.logo_odd,
       'color':data.color
     }
-    this.ifddApiService.updateOdd(donnes)
+    if(confirm("Voulez vous vraiment modifier l'ODD  "+data.name)) {
+      this.ifddApiService.updateOdd(donnes)
+    }
+    
     this.closeModal('mymodal')
+  }
+  deleteOdd(osc:any){
+    if(confirm("Voulez vous vraiment modifier l'ODD  "+osc.name)) {
+      this.ifddApiService.deleteOdd(osc.id)
+    }
+    
   }
   closeModal(id: string) {
     this.modalService.dismissAll(id)

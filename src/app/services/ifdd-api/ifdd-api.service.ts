@@ -11,6 +11,8 @@ import { NotifierService } from 'angular-notifier';
 import { OddInterface } from 'src/app/shared/oddInterface';
 import { map } from 'rxjs/internal/operators/map';
 import { Results } from 'src/app/DemoPages/Tables/tables-main/results';
+import { ListeOdd } from 'src/app/shared/odd';
+import { CountOsc } from 'src/app/shared/countOsc';
 
 @Injectable({
   providedIn: 'root'
@@ -71,21 +73,20 @@ export class IfddApiService {
     return ok
   }
 
-    creerOSC(data:any):boolean{
-      var ok=false
-      this.apiService.post_requete('/api/osc',data)
-      .then((result:any) => {
-        if(result.success){
-          ok=true
-        //  this.notifier.notify("success", "Création réussie");
-        }
-        else{
-          ok=false
-         // this.notifier.notify("error", "Création échouée");
-        }
-       // console.log(result)
-      });
-      return ok
+    creerOSC(data:any): Observable<any>{
+
+
+      return from(this.apiService.getRequest('/api/osc')).pipe(
+        map((osc) => {
+         
+          return osc;
+        }),
+        catchError(err => {
+          throw new Error(err);
+        })
+      );
+     
+      
     }
 
     getAllCategoriesOdd():any[]{
@@ -110,32 +111,16 @@ export class IfddApiService {
     }
 
 
-    getAllOdd():any[]{
-     var  listeOdd= new Array()
-      this.apiService.getRequest('/api/odd')
-      .then((result) => {
-        console.log(result)
-        if(result){
-        for (let index = 0; index < result.data.length; index++) {
-            listeOdd?.push({'id':result.data[index].id,
-            'name':result.data[index].name,
-                          'number':result.data[index].number,
-                          'number_categorie':result.data[index].number_categorie,
-                          'color':result.data[index].color,
-                          'logo_odd':result.data[index].logo_odd
-                          
-                        }
-                          )            
-          }
-         console.log(listeOdd)
-        }
-        else{
-          //this.notifier.notify("error", "Création échouée");
-        }
-       // console.log(result)
-      });
-
-      return listeOdd
+    getAllOdd(): Observable<ListeOdd> {
+      return from(this.apiService.getRequest('/api/odd')).pipe(
+        map((odds:ListeOdd) => {
+         
+          return odds;
+        }),
+        catchError(err => {
+          throw new Error(err);
+        })
+      );
     }
       getAllOsc1(): Observable<Results> {
       return from(this.apiService.getRequest('/api/osc?')).pipe(
@@ -166,6 +151,21 @@ export class IfddApiService {
         );
 
      
+  }
+
+  deleteOdd(id:string){
+    this.apiService.delete_requete('/api/odd/'+id)
+     .then((result) => {
+    
+      if(result){
+        this.notifier.notify("success", "Suppression réussie");
+        
+      }
+      else{
+        this.notifier.notify("error", "Suppression échouée");
+      }
+     // console.log(result)
+    });
   }
     deleteOsc(id:string){
       this.apiService.delete_requete('/api/osc/'+id)
@@ -199,5 +199,37 @@ export class IfddApiService {
         console.log(data.logo_odd)
       });
       return false
+     }
+
+     updateOsc(data:any):boolean{
+      var ok=false
+
+      this.apiService.put_requete('/api/osc/'+data.id,data)
+      .then((result:any) => {
+        if(result.success){
+          ok=true
+          this.notifier.notify("success", "Mise à jour réussie");
+        }
+        else{
+          ok=false
+          this.notifier.notify("error", "Mise à jour échouée");
+        }
+       
+      });
+      return false
+     }
+
+     countOsc():Observable<CountOsc> {
+
+      return from(this.apiService.getRequest('/api/count/osc'
+       )).pipe(
+        map((oscs:CountOsc) => {
+          
+          return oscs;
+        }),
+        catchError(err => {
+          throw new Error(err);
+        })
+      );
      }
 }

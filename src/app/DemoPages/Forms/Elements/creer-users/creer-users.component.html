@@ -1,0 +1,70 @@
+<div id="comp-render">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title">Grid</h5>
+        <form [formGroup]="userForm">
+               <!--nom OSC-->
+               <div class="position-relative row mb-3">
+                <label for="exampleNom" class="form-label col-sm-3 col-form-label"
+                  >Nom utilisation</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    name="name"
+                    id="name"
+                    placeholder="Nom utilisateur"
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                    
+                  />
+                  <!--<div style="color: red;" *ngIf="OscForm.controls['name'].invalid && OscForm.controls['name'].touched">
+                    <div *ngIf="OscForm.controls['name'].errors.required">
+                      Name is required.
+                    </div>
+                </div>-->
+                </div>
+
+              </div>
+              <!--abbréviation OSC-->
+              <div class="position-relative row mb-3">
+                <label
+                  for="exampleNumero"
+                  class="form-label col-sm-3 col-form-label"
+                  >Mot de passe</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    name="password"
+                    id="password"
+                    placeholder="mot de passe"
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                  <!--<div style="color: red;" *ngIf="OscForm.controls['password'].invalid && OscForm.controls['password'].touched">
+                    <div *ngIf="OscForm.controls['password'].errors.required">
+                      password is required.
+                    </div>
+                </div> -->
+                </div>
+              </div>
+            
+
+             
+
+    
+    
+     
+     
+          <div class="d-block text-center " style="margin-top: 80px;">
+           
+            <button class="me-2 btn btn-success" [disabled]="" >Créer</button>
+            <button class=" btn-icon btn-icon-only btn btn-outline-danger" type="button" >
+              Annuler
+             </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

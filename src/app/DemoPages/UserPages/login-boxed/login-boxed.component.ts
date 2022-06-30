@@ -19,6 +19,8 @@ export class LoginBoxedComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({});
   private readonly notifier: NotifierService;
 
+  loading:Boolean
+  
   constructor(
     private fb: FormBuilder,
     public authService: AuthApiService,
@@ -29,7 +31,7 @@ export class LoginBoxedComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.removeItem("token");
+   // localStorage.removeItem("token");
     this.initialiseLoginForm();
   }
 
@@ -54,6 +56,7 @@ export class LoginBoxedComponent implements OnInit {
    * submit login form
    */
   submitLoginForm() {
+    this.loading=true
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((response: { error: boolean; msg?: string }) => {
@@ -62,6 +65,7 @@ export class LoginBoxedComponent implements OnInit {
           console.log(response);
           
         } else {
+          this.loading=false
           //this.router.navigate([""]);
           this.router.navigate([""]);
           this.notifier.notify('success', 'Connexion réussie');

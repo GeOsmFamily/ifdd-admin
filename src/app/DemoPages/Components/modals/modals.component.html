@@ -8,16 +8,17 @@
   </div>
   <div class="modal-body">
     <perfect-scrollbar>
-       <!--Nom osc-->
+      <form [formGroup] = "OscForm">
+             <!--Nom osc-->
     <div class="position-relative row mb-3">
       <label for="exampleNom" class="form-label col-sm-3 col-form-label"
         >Nom de l'OSC</label
       >
       <div class="col-sm-9">
-        <input type="text" [(ngModel)] = "osc.name"
+        <input type="text" 
           name="name"
           id="name"
-         
+          formControlName="name"
           class="form-control"
         />
      
@@ -29,10 +30,10 @@
         >Abbréviation</label
       >
       <div class="col-sm-9">
-        <input type="text" [(ngModel)] = "osc.abbreviation"
+        <input type="text" 
           name="abbreviation"
           id="abbreviation"
-        
+          formControlName="abbreviation"
           class="form-control"
         />
      
@@ -44,7 +45,7 @@
           >Pays</label
         >
         <div class="col-sm-9">
-          <select  [(ngModel)]="osc.pays" name="pays" id="pays"   class="form-control">
+          <select   name="pays" id="pays"   class="form-control">
           
             <option  value="BENIN"     [selected]="'Bénin' === osc.pays">
               BENIN
@@ -64,14 +65,16 @@
         >Date fondation</label
       >
        
-      <div class="col-sm-9">
+      <div class="col-sm-9"> 
         <p>{{osc.date_fondation}}</p>
+      
         <input class="form-control"  
-      name="date_fondation"  id="date_fondation" formControlName="date_fondation"   id="date_fondation" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
+      name="date_fondation"  id="date_fondation" [(ngModel)]="model" formControlName="date_fondation"   id="date_fondation" ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}">  
        <div class="input-group-append">  
           <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>  
-        </div>    
-     
+        </div>  
+      
+        
       </div>
     </div>
       <!--Description osc-->
@@ -80,7 +83,7 @@
           >Description</label
         >
         <div class="col-sm-9">
-          <textarea  rows = "5" cols = "40" maxlength = "200" [(ngModel)] = "osc.description" name="description" id="description"  class="form-control"></textarea>
+          <textarea  rows = "5" cols = "40" maxlength = "200"  formControlName="description" name="description" id="description"  class="form-control"></textarea>
                  
        
         </div>
@@ -95,7 +98,7 @@
           <input
           name="personne_contact"
           id="personne_contact"
-          [(ngModel)] = "osc.personne_contact"
+          formControlName="personne_contact"
           type="text"
           class="form-control"
          
@@ -112,7 +115,7 @@
             <input
             name="telephone"
             id="telephone"
-            [(ngModel)] = "osc.telephone"
+            formControlName="telephone"
             type="text"
             class="form-control"
            
@@ -126,9 +129,9 @@
               >
               <div class="col-sm-9">
                 <input
-                name="email"
-                id="email"
-                [(ngModel)] = "osc.email_osc"
+                name="email_osc"
+                id="email_osc"
+                formControlName="email_osc"
                 type="text"
                 class="form-control"
                
@@ -136,21 +139,7 @@
               </div>
             </div>
              <!--email-->
-             <div class="position-relative row mb-3">
-              <label for="exampleNom" class="form-label col-sm-3 col-form-label"
-                >Email</label
-              >
-              <div class="col-sm-9">
-                <input
-                name="email"
-                id="email"
-                [(ngModel)] = "osc.email_osc"
-                type="text"
-                class="form-control"
-               
-              />
-              </div>
-            </div>
+           
              <!--site web-->
              <div class="position-relative row mb-3">
               <label for="exampleNom" class="form-label col-sm-3 col-form-label"
@@ -160,7 +149,7 @@
                 <input
                 name="site_web"
                 id="site_web"
-                [(ngModel)] = "osc.site_web"
+                formControlName="site_web"
                 type="text"
                 class="form-control"
                
@@ -176,7 +165,7 @@
                   <input
                   name="facebook"
                   id="facebook"
-                  [(ngModel)] = "osc.facebook"
+                  formControlName="facebook"
                   type="text"
                   class="form-control"
                  
@@ -193,7 +182,7 @@
                   <input
                   name="twitter"
                   id="twitter"
-                  [(ngModel)] = "osc.twitter"
+                  formControlName="twitter"
                   type="text"
                   class="form-control"
                  
@@ -209,7 +198,7 @@
                       <input
                       name="instagram"
                       id="instagram"
-                      [(ngModel)] = "osc.instagram"
+                      formControlName="instagram"
                       type="text"
                       class="form-control"
                      
@@ -226,7 +215,7 @@
                         <input
                         name="linkedin"
                         id="linkedin"
-                        [(ngModel)] = "osc.linkedin"
+                        formControlName="linkedin"
                         type="text"
                         class="form-control"
                        
@@ -243,7 +232,7 @@
                         <input
                         name="longitude"
                         id="longitude"
-                        [(ngModel)] = "osc.longitude"
+                        formControlName="longitude"
                         type="text"
                         class="form-control"
                        
@@ -260,7 +249,7 @@
                           <input
                           name="latitude"
                           id="latitude"
-                          [(ngModel)] = "osc.latitude"
+                          formControlName="latitude"
                           type="text"
                           class="form-control"
                          
@@ -277,103 +266,169 @@
                             <input
                             name="siege"
                             id="siege"
-                            [(ngModel)] = "osc.siege"
+                            formControlName="siege"
                             type="text"
                             class="form-control"
                            
                           />
                           </div>
                         </div>
-
-                         <!--Zone intervention-->
-                         <div class="position-relative row mb-3">
-                          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
-                            >Zone intervention</label
-                          >
-                          <div   class="col-sm-9">
-                            <div class="position-relative row " *ngFor="let zone of osc.zone_interventions">
-                              <div class="col-sm-3">
-                               
-                                  Name: <input type="text"  class="form-control"  [(ngModel)] = "zone.name">
-                            
-                    
-                             
-                               
-                              </div>
-                              <div class="col-sm-2">
-                                longitude: <input  [(ngModel)] = "zone.longitude" type="text" class="form-control">
+                        
+                        <!--Zones d'intervention-->
+                        <div class="position-relative row mb-3">
+                          <label
+                            for="zone_intervention"
+                            class="form-label col-sm-3 col-form-label"
+                            >Zone intervention</label>
+                  
+                          <div class="col-sm-9" formArrayName="zoneInterventions">
                                 
+                           
+                              <div class="position-relative row mb-3" *ngFor="let ZoneIntervention of getZoneInterventionsArray().controls; let i = index;" [formGroupName]="i">
+                               <div class="col-sm-3">
+                                Name: <input type="text" formControlName="name" class="form-control">
+                          
+                  
+                              <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('name').invalid && getZoneInterventionsArray().controls[i].get('name').touched">
+                                <div *ngIf="getZoneInterventionsArray().controls[i].get('name').errors.required">
+                                 intervention zone name is required.
+                                </div>
+                            </div>
                                </div>
-                               <div class="col-sm-2">
-                                latitude: <input  [(ngModel)] = "zone.latitude" type="text"  class="form-control">
-                               
+                               <div class="col-sm-3">
+                                longitude: <input type="text" formControlName="longitude" class="form-control">
+                                <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('longitude').invalid && getZoneInterventionsArray().controls[i].get('longitude').touched">
+                                  <div *ngIf="getZoneInterventionsArray().controls[i].get('longitude').errors.required">
+                                   intervention zone longitude is required.
+                                  </div>
+                              </div>
                                </div>
-                               <div class="col-sm-2">
+                               <div class="col-sm-3">
+                                latitude: <input type="text" formControlName="latitude" class="form-control">
+                                <div style="color: red;" *ngIf="getZoneInterventionsArray().controls[i].get('latitude').invalid && getZoneInterventionsArray().controls[i].get('latitude').touched">
+                                  <div *ngIf="getZoneInterventionsArray().controls[i].get('latitude').errors.required">
+                                   intervention zone latitude is required.
+                                  </div>
+                              </div>
+                               </div>
+                               <div class="col-sm-3">
                                <label style="color: white;">kjjjjjj</label> <button class="form-control" (click)="removeZoneIntervention(i)" class="btn btn-danger form-control">supprimer</button>
                             
                                </div>
                                
-                               </div>
-                               <button type="button" (click)="addOsccategoriesOdd()" >
-                                Ajouter
-                              </button>
+                              </div>
+                          
+                            <button type="button" (click)="addZoneIntervention()">
+                              Ajouter
+                            </button>
+                           
+                          
                           </div>
-                        
                         </div>
+
+
+                        
 
 
                         <!--Catéégorie ODD-->
-                        <div class="position-relative row mb-3">
-                          <label for="exampleNom" class="form-label col-sm-3 col-form-label"
-                            >Catégories ODD</label
-                          >
-                          <div   class="col-sm-9">
-                            <div class="position-relative row mb-3" *ngFor="let categorie of osc.categorie_odds">
-                              <div class="col-sm-5" >
-                                <label style="color: white;visibility: hidden;">kjjjjjj</label>
-                                <select name="idCategoriesOdd" id="idCategoriesOdd"   class="form-control">
-                                  <option value="" selected>--Choisir l'id catégorie ODD--</option>
-                                  <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
-                                 
-                              </select>
-                             
-                                
-                               </div>
-                               <div class="col-sm-5">
-                               Description: <textarea [(ngModel)] = "categorie.intitule"  name="description" id="description" class="form-control"></textarea>
-                           
-                               </div>
-                               
-                               <div class="col-sm-2">
-                               <label style="color: white;visibility: hidden;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
-                            
-                               </div>
-                               
-                               </div>
-                               <button type="button" (click)="addOsccategoriesOdd()" >
-                                Ajouter
-                              </button>
-                              
-                          </div>
-                        
-                        </div>
+        <div class="position-relative row mb-3">                   
+          <label
+          for="siege"
+          class="form-label col-sm-3 col-form-label"
+          >Catégories ODD</label>
+         <div class="col-sm-9" formArrayName="osccategoriesOdd">
+       
+      
+         
+            <div class="position-relative row " *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
+              <div class="col-sm-5" >
+                <label>Numéro de Cible ODD</label>
+                <input id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control" value="categoriesOdd.idCategoriesOdd"/>
+              </div>
+              <div class="col-sm-5">
+                Description: <textarea  formControlName="description" name="description" id="description" class="form-control" value="categoriesOdd.description"></textarea>
+              </div>
+              <div class="col-sm-2">
+                <label style="color: white;visibility: hidden;">kjjjjjj</label> <button class="form-control" (click)="removeOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
+          
+              </div>
+             
+            </div>
+        
+         
+        
+        </div>
+        
+        <div class="position-relative row mb-3">                   
+          <label
+          for="siege"
+          class="form-label col-sm-3 col-form-label"
+          ></label>
 
+          <div class="col-sm-9" formArrayName="addOscCategoriesOdd">
+       
+      
+         
+            <div class="position-relative  row" *ngFor="let categoriesOdd of  getAddOscCategoriesOddArray().controls; let i = index;" [formGroupName]="i">
+               <div class="col-sm-5" >
+                  <span >Numéro de Cible ODD</span>
+                  <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control">
+                     <option value="" selected>--Choisir l'id catégorie ODD--</option>
+                     <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
+               
+                  </select>
+           
+              
+                </div>
+                <div class="col-sm-5">
+                  Description: <textarea  formControlName="description" name="description" id="description" class="form-control"></textarea>
+         
+                </div>
+             
+                <div class="col-sm-2">
+                    <label style="color: white;visibility: hidden;">kjjjjjj</label> <button class="form-control" (click)="removeAddOsccategoriesOdd(i)" class="btn btn-danger form-control">supprimer</button>
+          
+                </div>
+             
+            </div>
+        
+            <button  type="button" (click)=" addOscCategoriesOddNew()" >
+              Ajouter
+            </button>
+         
+        
+        </div>
+
+        </div>
+      
+     
+       
+      </div>
+
+
+      </form>
+    
 
                         
     </perfect-scrollbar>
    
   </div>
 
-  <div class="modal-footer">
+  <div class="modal-footer" style="display:flex;justify-content:center" >
     <button type="button"
-            class="btn btn-outline-secondary"
-            (click)="dismiss()"
-            *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
-            [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
-      {{ modalConfig.dismissButtonLabel }}
+            class="btn btn-outline-primary"
+            (click)="close()"
+            *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+            [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+      Valider
     </button>
     <button type="button"
             class="btn btn-outline-primary"
+            (click)="updateOsc()">
+              Mettre à jour
+    </button>
+    <button type="button"
+            class="btn btn-outline-danger"
             (click)="close()"
             *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
             [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">

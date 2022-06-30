@@ -2,6 +2,7 @@ import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import { Component, OnInit, ViewChild  } from "@angular/core";
 import { ComponentHelper } from "src/app/helpers/componentHelper";
 import { PageTitleComponent } from "src/app/Layout/Components/page-title/page-title.component";
+import { Odds } from 'src/app/shared/odd';
 
 @Component({
   selector: "app-fiche-odd",
@@ -18,12 +19,15 @@ export class FicheODDComponent implements OnInit {
 
   display_fiche=false
 
-  listeOdd= new Array()
+  listeOdd:Odds[]
   constructor(private ifddApiService:IfddApiService) {}
 
   ngOnInit(): void {
     //console.log(this.heading)
-    this.listeOdd= this.ifddApiService.getAllOdd()
+    this.ifddApiService.getAllOdd().subscribe(oscs => {
+      this.listeOdd=oscs.data
+      console.log(this.listeOdd.length)
+      });
   }
   ngAfterViewInit(): void {
     //Called after every check of the component's or directive's content.
