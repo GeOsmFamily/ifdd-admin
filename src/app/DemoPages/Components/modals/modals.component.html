@@ -1,4 +1,4 @@
-<ng-template #modal >
+<ng-template #modal  let-modal>
   
   <div class="modal-header">
     <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
@@ -343,7 +343,7 @@
             <div class="position-relative row " *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
               <div class="col-sm-5" >
                 <label>Numéro de Cible ODD</label>
-                <input id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control" value="categoriesOdd.idCategoriesOdd"/>
+                <input id="category_number" formControlName="category_number"  class="form-control" value="categoriesOdd.category_number"/>
               </div>
               <div class="col-sm-5">
                 Description: <textarea  formControlName="description" name="description" id="description" class="form-control" value="categoriesOdd.description"></textarea>
@@ -372,9 +372,9 @@
             <div class="position-relative  row" *ngFor="let categoriesOdd of  getAddOscCategoriesOddArray().controls; let i = index;" [formGroupName]="i">
                <div class="col-sm-5" >
                   <span >Numéro de Cible ODD</span>
-                  <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control">
+                  <select  name="id" id="id" formControlName="id"  class="form-control">
                      <option value="" selected>--Choisir l'id catégorie ODD--</option>
-                     <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
+                     <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.category_number}}</option>
                
                   </select>
            

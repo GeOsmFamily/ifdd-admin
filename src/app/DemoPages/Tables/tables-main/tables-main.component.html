@@ -28,6 +28,14 @@
       <th mat-header-cell *matHeaderCellDef> Date de fondation</th>
       <td mat-cell *matCellDef="let element"> {{element.date_fondation}} </td>
     </ng-container>
+
+
+     <!-- status Column -->
+     <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Statut</th>
+      <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+    </ng-container>
+
  <!-- Actions Column -->
 
 
@@ -35,7 +43,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions</th>
       <td mat-cell *matCellDef="let element">
-        <app-edit-button-osc [osc]="element">  </app-edit-button-osc>
+        <app-edit-button-osc [osc]="element" [cibles]="idCategoriesOdd">  </app-edit-button-osc>
         <button type="button" class="me-2 btn btn-primary btn-sm" (click)="clickMethod(element)" >Supprimer</button>
       </td>
     </ng-container>

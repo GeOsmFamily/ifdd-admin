@@ -6,6 +6,8 @@ import { Datum } from "src/app/shared/osc";
 import { DateFormatHelperService } from "./dateFormatHelper/date-format-helper.service";
 import { ModalConfig } from "./modal.config";
 import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
+import { Cible } from 'src/app/shared/categorieOdd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-modals",
@@ -23,20 +25,21 @@ export class ModalsComponent implements OnInit {
  public modalConfig: ModalConfig
   @ViewChild('modal') private modalContent: TemplateRef<ModalsComponent>
   @Input() osc:Datum
+  //cibles odd
+  @Input() idCategoriesOdd:Cible[]
   private modalRef: NgbModalRef
   modalOptions:NgbModalOptions;
 
   //calendar
 model: NgbDateStruct;
 
-
-//cibles odd
-idCategoriesOdd= new Array() 
-
 OscForm!: FormGroup;
 
-constructor(private ifddApiService: IfddApiService,private fb: FormBuilder,private modalService: NgbModal,private dateTransform: DateFormatHelperService) { 
-    
+//active an OSC
+active=false
+
+constructor(private router: Router,private ifddApiService: IfddApiService,private fb: FormBuilder,private modalService: NgbModal,private dateTransform: DateFormatHelperService) { 
+  
   }
   
 ngAfterViewInit(): void {
@@ -45,12 +48,12 @@ ngAfterViewInit(): void {
   
  
    // this.convertArrayToFormArray()
+   
 }
 
 ngOnInit(): void { 
 
-    //get odd categories
-   // this.idCategoriesOdd=this.ifddApiService.getAllCategoriesOdd()
+   
 
     
     this.modalConfig={
@@ -98,7 +101,8 @@ ngOnInit(): void {
       for(let i=0; i < n; i++){
         //console.log(this.osc.zone_interventions[i].name)
         var formGroup = this.fb.group({
-          idCategoriesOdd: [this.osc.categorie_odds[i].category_number],
+          id:[this.osc.categorie_odds[i].id],
+          category_number: [this.osc.categorie_odds[i].category_number],
           description:[this.osc.categorie_odds[i].intitule],
          
     }) 
@@ -121,6 +125,7 @@ ngOnInit(): void {
       for(let i=0; i < n; i++){
         //console.log(this.osc.zone_interventions[i].name)
         var formGroup = this.fb.group({
+          id:[this.osc.zone_interventions[i].id],
           name: [this.osc.zone_interventions[i].name],
           longitude:[this.osc.zone_interventions[i].longitude],
           latitude:[this.osc.zone_interventions[i].latitude]
@@ -196,7 +201,8 @@ ngOnInit(): void {
     this.getZoneInterventionsArray().push(this.newZoneIntervention());  
   }
   newZoneIntervention(): FormGroup {  
-    return this.fb.group({  
+    return this.fb.group({ 
+      id: ['', Validators.required],
       name: ['', Validators.required],
           longitude: ['', Validators.required],
           latitude: ['', Validators.required], 
@@ -204,7 +210,8 @@ ngOnInit(): void {
   } 
   newOsccategoriesOdd(): FormGroup {  
     return this.fb.group({  
-      idCategoriesOdd: '',
+      id:'',
+      category_number: '',
       description: '', 
     })  
   }  
@@ -233,25 +240,27 @@ ngOnInit(): void {
     var zoneInterventions = this.OscForm.get('zoneInterventions') as FormArray;
     for (let index = 0; index < zoneInterventions.length; index++) {
       zoneInterventionArray.push({'name':zoneInterventions.at(index).value.name,
+      'id':zoneInterventions.at(index).value.id,
                                   'longitude':zoneInterventions.at(index).value.longitude,
                                 'latitude':zoneInterventions.at(index).value.latitude})
 
     }
-
+console.log("yyyyyyyyy")
+console.log(zoneInterventionArray)
     //construction du tableau des catégories d'odd de l'osc
      var oddCategories=new Array()
      var categoriesOdd = this.OscForm.get('osccategoriesOdd') as FormArray;
     for (let index = 0; index < categoriesOdd.length; index++) {
-      oddCategories.push({'id':categoriesOdd.at(index).get('idCategoriesOdd').value,
+      oddCategories.push({'id':categoriesOdd.at(index).get('id').value,
                                   'description':categoriesOdd.at(index).value.description})
-        console.log(categoriesOdd.at(index).get('idCategoriesOdd').value)
+       
     }
 
     var categoriesOdd = this.OscForm.get('addOscCategoriesOdd') as FormArray;
     for (let index = 0; index < categoriesOdd.length; index++) {
-      oddCategories.push({'id':categoriesOdd.at(index).get('idCategoriesOdd').value,
+      oddCategories.push({'id':categoriesOdd.at(index).get('id').value,
                                   'description':categoriesOdd.at(index).value.description})
-        console.log(categoriesOdd.at(index).get('idCategoriesOdd').value)
+        console.log(categoriesOdd.at(index).get('id').value)
     }
 
     console.log(oddCategories)
@@ -276,8 +285,21 @@ ngOnInit(): void {
       zone_intervention: zoneInterventionArray,
       osccategoriesOdd: oddCategories,
       
+      
     };
-    this.ifddApiService.updateOsc(data)
+    if(confirm("Voulez vous vraiment modifier l'OSC  "+data.name)) {
+      this.ifddApiService.updateOsc(data)
+      this.router.navigate(["fiche-osc"]);
+    }
+   
+  
+  }
+  activeOsc(){
+      this.active=true
+      if(confirm("Voulez vous vraiment activer l'OSC  "+this.osc.name)) {
+        this.ifddApiService.updateOsc(this.active)
+      }
+   
   }
   }
 

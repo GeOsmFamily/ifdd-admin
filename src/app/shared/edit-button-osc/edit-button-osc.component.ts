@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalsComponent } from 'src/app/DemoPages/Components/modals/modals.component';
+import { Cible } from '../categorieOdd';
 import { Datum } from '../osc';
 
 @Component({
@@ -15,6 +16,7 @@ export class EditButtonOscComponent implements OnInit {
   @ViewChild('modal') private modalComponent: ModalsComponent
   
   @Input() osc:Datum
+  @Input() cibles:Cible[]
 
   editStepper=false
   constructor() { }

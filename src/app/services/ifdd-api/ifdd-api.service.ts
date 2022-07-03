@@ -13,12 +13,14 @@ import { map } from 'rxjs/internal/operators/map';
 import { Results } from 'src/app/DemoPages/Tables/tables-main/results';
 import { ListeOdd } from 'src/app/shared/odd';
 import { CountOsc } from 'src/app/shared/countOsc';
+import { CategoriesOdd } from 'src/app/shared/categorieOdd';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IfddApiService {
   
+  //public categoriesOdd: BehaviourSubject<
 
   private readonly notifier: NotifierService; 
   
@@ -76,9 +78,9 @@ export class IfddApiService {
     creerOSC(data:any): Observable<any>{
 
 
-      return from(this.apiService.getRequest('/api/osc')).pipe(
+      return from(this.apiService.post_requete('/api/osc',data)).pipe(
         map((osc) => {
-         
+         console.log(osc)
           return osc;
         }),
         catchError(err => {
@@ -89,25 +91,19 @@ export class IfddApiService {
       
     }
 
-    getAllCategoriesOdd():any[]{
-      this.apiService.getRequest('/api/categorieodd')
-      .then((result) => {
-        console.log(result)
-        if(result){
-          for (let index = 0; index < result.data.length; index++) {
-            this.idCategoriesOdd?.push({'id':result.data[index].id,
-                                        'categorie_number':result.data[index].category_number})
-            
-          }
-         console.log(this.idCategoriesOdd)
-        }
-        else{
-          //this.notifier.notify("error", "Création échouée");
-        }
-       // console.log(result)
-      });
+    getAllCategoriesOdd():Observable<CategoriesOdd>{
 
-      return this.idCategoriesOdd
+      return from( this.apiService.getRequest('/api/categorieodd')).pipe(
+        map((cibles) => {
+         //console.log(osc)
+          return cibles;
+        }),
+        catchError(err => {
+          throw new Error(err);
+        })
+      );
+    
+     
     }
 
 

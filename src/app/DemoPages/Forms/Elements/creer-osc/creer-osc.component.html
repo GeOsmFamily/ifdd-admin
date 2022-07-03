@@ -1,7 +1,7 @@
 <div id="comp-render">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <h5 class="card-title">Grid</h5>
+        <h5 class="card-title text-center" style="margin-bottom:50px">Formulaire de création  d'une OSC</h5>
         <form [formGroup]="OscForm">
                <!--nom OSC-->
                <div class="position-relative row mb-3">
@@ -404,9 +404,9 @@
             <div class="position-relative row " *ngFor="let categoriesOdd of getOsccategoriesOddArray().controls; let i = index;" [formGroupName]="i">
               <div class="col-sm-5" >
                 <span >Numéro de Cible ODD</span>
-                <select name="idCategoriesOdd" id="idCategoriesOdd" formControlName="idCategoriesOdd"  class="form-control">
+                <select name="category_number" id="category_number" formControlName="category_number"  class="form-control">
                   <option value="" selected>--Choisir l'id catégorie ODD--</option>
-                  <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.categorie_number}}</option>
+                  <option *ngFor="let opt of idCategoriesOdd" value={{opt.id}}>{{opt.category_number}}</option>
                 </select>
            
               

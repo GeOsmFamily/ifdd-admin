@@ -63,6 +63,7 @@ export class LoginBoxedComponent implements OnInit {
         if (response.error) {
           this.notifier.notify('error', 'Echec de Connexion');
           console.log(response);
+          this.loading=false
           
         } else {
           this.loading=false
