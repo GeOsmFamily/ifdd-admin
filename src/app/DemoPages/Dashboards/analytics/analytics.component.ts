@@ -7,23 +7,27 @@ import {
   faAngleDown,
   faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { IfddApiService } from "src/app/services/ifdd-api/ifdd-api.service";
 
 @Component({
   selector: "app-analytics",
   templateUrl: "./analytics.component.html",
 })
 export class AnalyticsComponent implements OnInit {
+
+
   faTh = faTh;
   faCheck = faCheck;
   faTrash = faTrash;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
 
-  heading = "Analytics Dashboard";
-  subheading =
-    "This is an example dashboard created using build-in elements and components.";
-  icon = "pe-7s-plane icon-gradient bg-tempting-azure";
+  heading = "Tableau de bord";
+  subheading ="Tableau de bord de la cartographie des organisations travaillant sur les ODD"
+ icon = "pe-7s-plane icon-gradient bg-tempting-azure";
 
+  oscNumber:number
+/*
   slideConfig6 = {
     className: "center",
     infinite: true,
@@ -177,6 +181,16 @@ export class AnalyticsComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false,
   };
+*/
+  constructor(private ifddApiService:IfddApiService) {
+   
+  }
+  ngOnInit() {
 
-  ngOnInit() {}
+    this.ifddApiService.countOsc().subscribe(countOSC => {
+     if(countOSC.success){
+      this.oscNumber=countOSC.data
+     }
+     });
+  }
 }

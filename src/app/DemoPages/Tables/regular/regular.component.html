@@ -6,18 +6,18 @@
   <div class="m-3">
   
   <form>
-    <div class="form-group form-inline">
+    <!--<div class="form-group form-inline">
       Recherche par nom: 
 <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
         (input)="search($event.target.value)" />
-    </div>
+    </div>-->
   </form>
   <table class="table table-striped">
     <thead>
       <tr>
      
         <th scope="col" sortable="name">Nom</th>
-        <th scope="col" sortable="area">Nombre de catégories</th>
+        <th scope="col" sortable="area">Nombre de cibles</th>
      
         <th class="text-center">Actions</th>
       </tr>
@@ -28,19 +28,19 @@
        
         <td>
          
-          {{ osc.name }}
+          ODD {{osc.number}} : {{ osc.name }}
         </td>
         <td>{{ osc.number_categorie }}</td>
        
         <td class="text-center">
          <tr>
           <button type="button" class="me-2 btn btn-primary btn-sm" (click)="open(mymodal,osc)">Editer</button>
-          <button type="button" class="me-2 btn btn-primary btn-sm">Supprimer</button>
+          <button type="button" class="me-2 btn btn-primary btn-sm" (click)="deleteOdd(osc)">Supprimer</button>
        
          </tr>
          <ng-template #mymodal let-modal>
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+            <h4 class="modal-title " id="modal-basic-title">{{osc.name}}</h4>
            
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
@@ -148,7 +148,9 @@
 
                 </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="closeModal(mymodal)">Annuler</button>
             <button type="button" class="btn btn-outline-dark" (click)="update(editData)">Mettre à jour</button>
+         
           </div>
         </ng-template>
             </td>
@@ -158,7 +160,7 @@
 
   <ngb-pagination  [(page)]="page"
   [pageSize]="pageSize"
-  [collectionSize]="allOsc.length" class="d-flex justify-content-center"></ngb-pagination>
+  [collectionSize]=17 class="d-flex justify-content-center"></ngb-pagination>
 </div>
   <!--<div class="table-responsive">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -290,12 +292,7 @@
       </tbody>
     </table>
   </div>-->
-  <div class="d-block text-center card-footer">
-    <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger">
-      <i class="pe-7s-trash btn-icon-wrapper"> </i>
-    </button>
-    <button class="btn-wide btn btn-success">Save</button>
-  </div>
+ 
 </div>
 
 

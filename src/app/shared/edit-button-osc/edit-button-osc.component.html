@@ -1,3 +1,6 @@
 <button type="button" class="me-2 btn btn-primary btn-sm" (click)="openModal()">Editer</button>
-<app-modals [osc]="osc" #modal></app-modals>
-<!--<app-osc-stepper *ngIf="editStepper"></app-osc-stepper>-->
+
+<app-modals [osc]="osc" [idCategoriesOdd]="cibles" #modal></app-modals>
+<!--
+    <button type="button" class="me-2 btn btn-primary btn-sm" (click)="openModal()">Editer</button>
+-->

@@ -120,7 +120,11 @@ import { FicheODDComponent } from "./DemoPages/Dashboards/fiche-odd/fiche-odd.co
 import {DataTablesModule} from 'angular-datatables';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatTableModule} from '@angular/material/table'; 
+import {MatTableModule} from '@angular/material/table';
+import { CiblesComponent } from "./DemoPages/Dashboards/cibles/cibles.component";
+import { UsersComponent } from "./DemoPages/Dashboards/users/users.component";
+import { CreerUsersComponent } from './DemoPages/Forms/Elements/creer-users/creer-users.component';
+import { UserTableComponent } from './DemoPages/Tables/user-table/user-table.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -219,7 +223,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchFilterPipe,
    
     EditButtonOscComponent,
-       
+      
+    UsersComponent,
+    CiblesComponent,
+    CreerUsersComponent,
+    UserTableComponent,
    
    
     

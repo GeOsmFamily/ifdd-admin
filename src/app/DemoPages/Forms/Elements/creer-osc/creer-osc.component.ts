@@ -5,6 +5,8 @@ import { IfddApiService } from 'src/app/services/ifdd-api/ifdd-api.service';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Datum } from 'src/app/shared/osc';
+import { Router } from '@angular/router';
+import { Cible } from 'src/app/shared/categorieOdd';
 
 
 @Component({
@@ -14,17 +16,20 @@ import { Datum } from 'src/app/shared/osc';
 })
 export class CreerOscComponent implements OnInit {
 
+ // public ciblesOdd: BehaviorSubject<Cible>= new BehaviorSubject<Cible>({} as Cible)
+
   //formulaire de création des osc
   OscForm!: FormGroup;
   private readonly notifier: NotifierService;
-idCategoriesOdd= new Array() 
+  idCategoriesOdd:Cible[]=[]
 
 //calendar
 model: NgbDateStruct;
 
 data:any
+loading=false
 
-  constructor( notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
+  constructor( private router: Router, notifierService: NotifierService,private fb: FormBuilder,private ifddApiService: IfddApiService) {
     this.notifier = notifierService;
    
    }
@@ -60,7 +65,7 @@ data:any
   }  
   newOsccategoriesOdd(): FormGroup {  
     return this.fb.group({  
-      idCategoriesOdd: '',
+      category_number: '',
       description: '', 
     })  
   }  
@@ -106,24 +111,24 @@ data:any
     
     //initialisation du formulaire de création de l'OSC
     this.OscForm = this.fb.group({
-      name: ['', [Validators.required]],
-      abbreviation: ['', Validators.required],
-      pays: ['', Validators.required],
-      date_fondation: ['', Validators.required],
+      name: ['',Validators.required],
+      abbreviation: ['',Validators.required],
+      pays: ['',Validators.required],
+      date_fondation: [''],
       description: ['', ],
-      personne_contact: ['', Validators.required],
-      telephone: ['', [Validators.required]],
-      email_osc: ['', Validators.required],
+      personne_contact: ['', ],
+      telephone: [''],
+      email_osc: [''],
       site_web: ['',],
       facebook: ['',],
       twitter: ['', ],
       instagram: ['', ],
       linkedin: ['',],
-      longitude: ['', Validators.required],
-      latitude: ['', Validators.required],
-      siege: ['', Validators.required],
-      zoneInterventions:this.fb.array([],[Validators.required]), 
-      osccategoriesOdd: this.fb.array([]),
+      longitude: [''],
+      latitude: [''],
+      siege: [''],
+      zoneInterventions:this.fb.array([],Validators.required), 
+      osccategoriesOdd: this.fb.array([],Validators.required),
       
     });
     
@@ -133,10 +138,15 @@ data:any
     
 
     //get odd categories
-    this.idCategoriesOdd=this.ifddApiService.getAllCategoriesOdd()
-
+  
+    this.ifddApiService.getAllCategoriesOdd().subscribe(cibles => {
+      this.idCategoriesOdd=cibles.data
+     // console.log(this.idCategoriesOdd)
+    });
+ 
   }
   submit(){
+   this.loading=true
     console.log("dta  = "+this.OscForm.value.date_fondation)
    
     if(this.OscForm.valid){
@@ -156,9 +166,9 @@ data:any
      var oddCategories=new Array()
      var categoriesOdd = this.OscForm.get('osccategoriesOdd') as FormArray;
     for (let index = 0; index < categoriesOdd.length; index++) {
-      oddCategories.push({'id':categoriesOdd.at(index).get('idCategoriesOdd').value,
+      oddCategories.push({'id':categoriesOdd.at(index).get('category_number').value,
                                   'description':categoriesOdd.at(index).value.description})
-        console.log(categoriesOdd.at(index).get('idCategoriesOdd').value)
+        console.log(categoriesOdd.at(index).get('category_number').value)
     }
     console.log(oddCategories)
     var data = {
@@ -183,24 +193,36 @@ data:any
       
     };
 
-    var ok=this.ifddApiService.creerOSC(data)
-    this.removeAllZoneIntervention()
-    this.removeAllOsccategoriesOdd()
-    if(ok)
+   this.creerOsc(data)
+   
+   
+  
 
-   // this.addItem(data)
-      this.OscForm.reset()
-      console.log("form-rest= ", this.OscForm.reset())
-    jQuery('app-creer-osc').css('display', 'none');
-   // alert(" création réussie")
-   this.notifier.notify('success','création réussie');
-    }
-    else{
-     // alert("formulaire non valide")
-      this.notifier.notify('error', 'Création échouée');
+   
+    
 
-    }
   }
+}
+
+creerOsc(data){
+  this.ifddApiService.creerOSC(data).subscribe(osc => {
+      if(osc.success){
+        this.loading=false
+        this.OscForm.reset()
+        this.notifier.notify('success','création réussie');
+        jQuery('app-creer-osc').css('display', 'none');
+        this.removeAllZoneIntervention()
+        this.removeAllOsccategoriesOdd()
+        
+
+        this.router.navigate(["fiche-osc"])
+      }
+      else{
+        this.loading=false
+        this.notifier.notify('error', 'Création échouée');    
+      }
+   });
+}
   annuler(){
     this.removeAllZoneIntervention()
     this.removeAllOsccategoriesOdd()

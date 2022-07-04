@@ -11,10 +11,8 @@
         </div>
       </div>
     </div>
-    <div class="page-title-actions">
-      <button type="button" class="btn-shadow me-3 btn btn-dark">
-        <fa-icon [icon]="faStar"></fa-icon>
-      </button>
+    <div class="page-title-actions" *ngIf="button">
+     
       <button
         type="button"
         class="btn-shadow d-inline-flex align-items-center btn btn-success"
@@ -29,5 +27,5 @@
 
 
 
-<app-creer-odd *ngIf="displayOdd" (newItemEvent)="addItem($event)"></app-creer-odd>
+<app-creer-odd *ngIf="displayOdd" ></app-creer-odd>
 <app-creer-osc *ngIf="displayOsc"></app-creer-osc>

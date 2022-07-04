@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Cible } from 'src/app/shared/categorieOdd';
 
 
 
@@ -50,13 +51,14 @@ export class TablesMainComponent implements OnInit {
   lastPage=0
   pageSizeOptions: number[] = [];
 
-  displayedColumns: string[] = ['name', 'pays', 'date_fondation','actions'];
+  displayedColumns: string[] = ['name', 'pays', 'date_fondation','active','actions'];
   dataSource: MatTableDataSource<Datum> = new MatTableDataSource();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
 
+  idCategoriesOdd:Cible[]=[]
   constructor(private ifddApiService:IfddApiService) {
    
   }
@@ -99,6 +101,11 @@ export class TablesMainComponent implements OnInit {
    
   }
   ngOnInit(): void {
+       //get odd categories
+       this.ifddApiService.getAllCategoriesOdd().subscribe(cibles => {
+        this.idCategoriesOdd=cibles.data
+        
+      });
     //Load initial data
    this.ListeOsc()
   

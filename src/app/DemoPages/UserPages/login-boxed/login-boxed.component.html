@@ -1,8 +1,10 @@
-<div class="h-100 bg-plum-plate bg-animation">
+<div class="h-100" style="background-color: #255033;">
   <div class="d-flex h-100 justify-content-center align-items-center">
     <div class="mx-auto app-login-box col-md-8">
-      <div class="app-logo-inverse mx-auto mb-3"></div>
-      <div class="modal-dialog w-100 mx-auto">
+      <div  style="margin:0 auto;width:300px">
+        <img  class="img-fluid img-responsive" src="assets/images/ifddlogo.png"/>
+      </div>
+      <div class="modal-dialog w-100 mx-auto " style="margin-top:-30px">
         <div class="modal-content">
           <form [formGroup]="loginForm" (submit)="submitLoginForm()">
             <div class="modal-body">
@@ -32,13 +34,7 @@
                     class="form-control"
                     aria-describedby="exampleInputGroup1__BV_description_"
                   />
-                  <small
-                    tabindex="-1"
-                    id="exampleInputGroup1__BV_description_"
-                    class="form-text text-muted"
-                    >Nous ne partagerons jamais votre adresse électronique avec
-                    qui que ce soit.
-                  </small>
+                 
                 </div>
               </div>
               <div id="exampleInputGroup2" role="group" class="mb-3">
@@ -56,31 +52,18 @@
                   />
                 </div>
               </div>
-              <div class="custom-control custom-checkbox form-check">
-                <input
-                  id="exampleCheck"
-                  type="checkbox"
-                  name="check"
-                  autocomplete="off"
-                  class="form-check-input"
-                  value="true"
-                />
-                <label for="exampleCheck" class="form-label form-check-label">
-                  Gardez-moi connecté
-                </label>
-              </div>
+             
             </div>
             <div class="modal-footer clearfix">
-              <div class="float-start">
-                <a [routerLink]="" class="btn-lg btn btn-link"
-                  >Reinitialiser le mot de Passe</a
-                >
-              </div>
+             
+              <div class="spinner-grow text-muted text-center" *ngIf="loading" ></div>
+
               <div class="float-end">
                 <button
+                  style="background-color: #255033;color:black;opacity:unset"
                   [disabled]="!loginForm.valid"
                   type=" submit"
-                  class="btn btn-primary btn-lg"
+                  class="btn"
                 >
                   Connexion
                 </button>
@@ -89,9 +72,7 @@
           </form>
         </div>
       </div>
-      <div class="text-center text-white opacity-8 mt-3">
-        Copyright © Position 237
-      </div>
+     
     </div>
   </div>
 </div>
